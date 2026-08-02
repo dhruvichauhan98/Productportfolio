@@ -1,0 +1,1530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Subsidex — Platform Architecture Case Study · Dhruvi Chauhan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..600&family=Space+Grotesk:wght@400..700&family=Public+Sans:wght@300..600&display=swap" rel="stylesheet">
+<style>
+
+/* ===================== TOKENS ===================== */
+:root {
+  --gold:       #7C6FF0;
+  --gold-soft:  #9D93F5;
+  --steel:      #45C4B0;
+  --steel-soft: #8FE0D4;
+  --ink:        #EDEBF5;
+  --ink-dim:    #B4B1C7;
+  --ink-faint:  #8B889E;
+  --hairline:         rgba(255,255,255,.08);
+  --hairline-strong:  rgba(255,255,255,.16);
+  --card-bg:    rgba(255,255,255,.03);
+  --card-bg-dense: rgba(8,8,16,.55);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: #101018;
+  color: var(--ink);
+  font-family: 'Public Sans', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.7;
+}
+
+h1, h2, h3, h4 { font-family: 'Space Grotesk', sans-serif; font-weight: 700; margin: 0; }
+p { margin: 0; }
+::selection { background: var(--gold); color: #101018; }
+
+.wrap { max-width: 1180px; margin: 0 auto; padding: 0 48px; }
+
+/* ===================== PHASES ===================== */
+
+.phase { position: relative; }
+
+.phase-cold {
+  background:
+    radial-gradient(ellipse at 78% 12%, rgba(50,65,200,.08), transparent 50%),
+    radial-gradient(ellipse at 12% 72%, rgba(30,40,130,.06), transparent 48%),
+    #0d0d17;
+}
+
+.phase-shift {
+  background: #101018;
+}
+
+.phase-build {
+  background: #101018;
+}
+
+.phase-guard {
+  background:
+    radial-gradient(ellipse at 32% 22%, rgba(69,196,176,.08), transparent 52%),
+    #0f1019;
+}
+
+.phase-warm {
+  background:
+    radial-gradient(ellipse at 50% 6%, rgba(124,111,240,.16), transparent 50%),
+    radial-gradient(ellipse at 80% 80%, rgba(69,196,176,.05), transparent 45%),
+    #101018;
+}
+
+/* ===================== BRIDGES ===================== */
+
+.bridge {
+  padding: 108px 0;
+  text-align: center;
+}
+
+.bridge-cold-shift {
+  background: linear-gradient(180deg,
+    #0d0d17 0%,
+    #0f0f18 40%,
+    #101018 100%
+  );
+}
+
+.bridge-shift-build {
+  background: #101018;
+  border-top: 1px solid var(--hairline);
+  border-bottom: 1px solid var(--hairline);
+}
+
+.bridge-build-guard {
+  background: linear-gradient(180deg,
+    #101018 0%,
+    #0f1019 100%
+  );
+}
+
+.bridge-guard-warm {
+  background: linear-gradient(180deg,
+    #0f1019 0%,
+    #101018 60%
+  );
+}
+
+.bridge-inner { position: relative; }
+
+.pq-rule {
+  width: 40px;
+  height: 2px;
+  background: var(--gold);
+  border-radius: 2px;
+  margin: 0 auto 40px;
+}
+
+.pull-quote {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(28px, 4.8vw, 56px);
+  font-weight: 700;
+  font-style: italic;
+  letter-spacing: -.03em;
+  line-height: 1.1;
+  color: var(--ink);
+  max-width: 18ch;
+  margin: 0 auto 40px;
+  border: none;
+  padding: 0;
+}
+
+.narrative-bridge {
+  font-family: 'Lora', serif;
+  font-style: italic;
+  font-size: 17px;
+  line-height: 1.82;
+  color: var(--ink-dim);
+  max-width: 50ch;
+  margin: 0 auto;
+}
+
+/* ===================== CHAPTER CONNECTOR ===================== */
+
+.chapter-connector {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+
+.chapter-line {
+  flex: 1;
+  height: 1px;
+  background: rgba(255,255,255,.05);
+}
+
+.chapter-label {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 10px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  white-space: nowrap;
+}
+
+/* ===================== SHARED COMPONENTS ===================== */
+
+.eyebrow {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.section-head { margin-bottom: 48px; }
+.section-head .eyebrow { margin-bottom: 12px; }
+.section-head h2 {
+  font-size: clamp(26px, 3.8vw, 38px);
+  letter-spacing: -.02em;
+  line-height: 1.15;
+  margin-bottom: 14px;
+}
+.section-head p {
+  font-size: 15.5px;
+  color: var(--ink-dim);
+  max-width: 62ch;
+  line-height: 1.75;
+}
+
+/* ===================== HERO ===================== */
+
+.hero {
+  padding: 104px 0 88px;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 11px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--steel-soft);
+  border: 1px solid var(--hairline-strong);
+  padding: 8px 16px;
+  border-radius: 999px;
+  margin-bottom: 36px;
+}
+
+.hero-badge .dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--gold);
+  flex-shrink: 0;
+}
+
+.hero h1 {
+  font-size: clamp(52px, 8vw, 88px);
+  font-weight: 700;
+  letter-spacing: -.035em;
+  line-height: 1.0;
+  margin-bottom: 28px;
+}
+
+.hero h1 em {
+  font-style: italic;
+  color: var(--gold);
+  font-weight: 500;
+}
+
+.hero-tagline {
+  font-family: 'Lora', serif;
+  font-style: italic;
+  font-size: 19px;
+  line-height: 1.72;
+  color: var(--ink-dim);
+  max-width: 64ch;
+  margin-bottom: 14px;
+}
+
+.hero-meta {
+  font-size: 13px;
+  color: var(--ink-faint);
+  letter-spacing: .02em;
+  margin-bottom: 56px;
+}
+
+/* stat row */
+.stat-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+.stat-card {
+  background: rgba(255,255,255,.025);
+  border: 1px solid rgba(255,255,255,.07);
+  border-radius: 14px;
+  padding: 22px 18px;
+}
+
+.stat-num {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--gold-soft);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.stat-label {
+  font-size: 12px;
+  color: var(--ink-faint);
+  line-height: 1.4;
+}
+
+/* ===================== PROBLEM (cold phase — dense) ===================== */
+
+.section-problem {
+  padding: 72px 0 96px;
+}
+
+.problem-intro {
+  font-size: 16px;
+  color: var(--ink-dim);
+  line-height: 1.82;
+  max-width: 70ch;
+  margin-bottom: 44px;
+}
+
+.problem-intro strong { color: var(--ink); }
+
+.pain-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.pain-card {
+  background: var(--card-bg-dense);
+  border: 1px solid rgba(255,255,255,.07);
+  border-radius: 14px;
+  padding: 22px 20px;
+}
+
+.pain-num {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .16em;
+  color: var(--steel);
+  margin-bottom: 12px;
+}
+
+.pain-card h3 { font-size: 15px; font-weight: 700; margin-bottom: 9px; line-height: 1.3; }
+.pain-card p  { font-size: 13.5px; color: var(--ink-dim); line-height: 1.68; }
+
+/* ===================== OBJECTIVES (shift phase) ===================== */
+
+.section-objectives {
+  padding: 96px 0 72px;
+}
+
+.obj-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+}
+
+.obj-col h3 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--steel);
+  margin-bottom: 22px;
+}
+
+.outcome-cards { display: flex; flex-direction: column; gap: 14px; }
+
+.outcome-card {
+  background: var(--card-bg);
+  border: 1px solid var(--hairline);
+  border-radius: 13px;
+  padding: 18px 18px 18px 22px;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.outcome-num {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--gold);
+  letter-spacing: .1em;
+  flex-shrink: 0;
+  padding-top: 3px;
+}
+
+.outcome-card h4 { font-size: 14px; font-weight: 700; margin-bottom: 5px; }
+.outcome-card p  { font-size: 13px; color: var(--ink-dim); line-height: 1.62; }
+
+.arch-goals { display: flex; flex-direction: column; gap: 9px; }
+
+.arch-goal {
+  display: flex;
+  align-items: flex-start;
+  gap: 13px;
+  padding: 12px 16px;
+  border-radius: 9px;
+  background: var(--card-bg);
+  border: 1px solid var(--hairline);
+  font-size: 13.5px;
+  color: var(--ink-dim);
+  line-height: 1.5;
+}
+
+.arch-goal-num {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--steel);
+  flex-shrink: 0;
+  padding-top: 2px;
+  min-width: 20px;
+}
+
+/* ===================== BASELINE (shift phase) ===================== */
+
+.section-baseline {
+  padding: 72px 0 96px;
+}
+
+.baseline-intro {
+  font-size: 16px;
+  color: var(--ink-dim);
+  line-height: 1.8;
+  max-width: 66ch;
+  margin-bottom: 52px;
+}
+
+.flow-row {
+  display: flex;
+  align-items: stretch;
+}
+
+.flow-step {
+  flex: 1;
+  background: var(--card-bg);
+  border: 1px solid var(--hairline);
+  border-radius: 14px;
+  padding: 26px 20px;
+}
+
+.flow-step-tag {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--steel);
+  margin-bottom: 10px;
+}
+
+.flow-step p { font-size: 13.5px; color: var(--ink-dim); line-height: 1.6; }
+
+.flow-arrow {
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  color: var(--ink-faint);
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+/* ===================== SOLUTION (build phase — open) ===================== */
+
+.section-solution {
+  padding: 96px 0;
+}
+
+.solution-sub { margin-bottom: 88px; }
+.solution-sub:last-child { margin-bottom: 0; }
+
+.sub-label {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--steel);
+  margin-bottom: 24px;
+}
+
+/* scope */
+.scope-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.scope-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 14px 18px;
+  background: var(--card-bg);
+  border: 1px solid var(--hairline);
+  border-radius: 10px;
+  font-size: 13.5px;
+  color: var(--ink-dim);
+  line-height: 1.5;
+}
+
+.scope-num {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--gold);
+  flex-shrink: 0;
+  padding-top: 2px;
+  min-width: 18px;
+}
+
+/* design inputs */
+.inputs-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.inputs-col {
+  background: var(--card-bg);
+  border: 1px solid var(--hairline);
+  border-radius: 14px;
+  padding: 28px 24px;
+}
+
+.inputs-col h4 {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 18px;
+}
+
+.inputs-col ul {
+  margin: 0; padding: 0; list-style: none;
+  display: flex; flex-direction: column; gap: 10px;
+}
+
+.inputs-col li {
+  font-size: 13.5px;
+  color: var(--ink-dim);
+  line-height: 1.62;
+  padding-left: 18px;
+  position: relative;
+}
+
+.inputs-col li::before {
+  content: '–';
+  position: absolute; left: 0;
+  color: var(--ink-faint);
+}
+
+/* arch image */
+.arch-img-wrap {
+  border: 1px solid var(--hairline);
+  border-radius: 20px;
+  overflow: hidden;
+  background: var(--card-bg);
+}
+
+.arch-img-wrap img {
+  width: 100%;
+  display: block;
+}
+
+.arch-img-cap {
+  padding: 14px 20px;
+  font-size: 12.5px;
+  color: var(--ink-faint);
+  border-top: 1px solid var(--hairline);
+  font-style: italic;
+}
+
+/* data flow */
+.flow-list { display: flex; flex-direction: column; }
+
+.flow-step-row {
+  display: flex;
+  gap: 22px;
+  align-items: flex-start;
+  padding: 22px 0;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.flow-step-row:last-child { border-bottom: none; }
+
+.flow-step-num {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--steel);
+  flex-shrink: 0;
+  width: 24px;
+  padding-top: 2px;
+}
+
+.flow-step-row p { font-size: 14.5px; color: var(--ink-dim); line-height: 1.68; }
+
+/* rpa */
+.rpa-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.rpa-col {
+  background: var(--card-bg);
+  border: 1px solid var(--hairline);
+  border-radius: 16px;
+  padding: 28px 24px;
+}
+
+.rpa-col h4 {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 6px;
+}
+
+.rpa-desc {
+  font-size: 13px;
+  color: var(--ink-faint);
+  font-style: italic;
+  margin-bottom: 22px;
+  min-height: 20px;
+}
+
+.rpa-items { display: flex; flex-direction: column; gap: 16px; }
+
+.rpa-item h5 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.rpa-item p { font-size: 13px; color: var(--ink-dim); line-height: 1.55; }
+
+/* ===================== SECURITY (guard phase — precise) ===================== */
+
+.section-security {
+  padding: 96px 0;
+}
+
+.security-block { margin-bottom: 60px; }
+.security-block:last-child { margin-bottom: 0; }
+
+.security-block h3 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--steel);
+  margin-bottom: 22px;
+}
+
+.security-two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  align-items: start;
+}
+
+.security-bullets { display: flex; flex-direction: column; gap: 11px; }
+
+.security-bullet {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  font-size: 14.5px;
+  color: var(--ink-dim);
+  line-height: 1.65;
+}
+
+.security-bullet::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--gold);
+  flex-shrink: 0;
+  margin-top: 8px;
+}
+
+.archival-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.archival-card {
+  background: var(--card-bg);
+  border: 1px solid var(--hairline);
+  border-radius: 13px;
+  padding: 20px 18px;
+}
+
+.archival-card h4 {
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 13px;
+}
+
+.archival-card ul {
+  margin: 0; padding: 0; list-style: none;
+  display: flex; flex-direction: column; gap: 9px;
+}
+
+.archival-card li {
+  font-size: 13px;
+  color: var(--ink-dim);
+  line-height: 1.55;
+  padding-left: 16px;
+  position: relative;
+}
+
+.archival-card li::before {
+  content: '–';
+  position: absolute; left: 0;
+  color: var(--ink-faint);
+}
+
+/* ===================== BUSINESS VALUE (warm phase — generous) ===================== */
+
+.section-value {
+  padding: 96px 0 72px;
+}
+
+.value-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
+.value-item {
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+  padding: 24px 20px;
+  background: var(--card-bg);
+  border: 1px solid var(--hairline);
+  border-radius: 12px;
+  transition: border-color .2s;
+}
+
+.value-item:hover { border-color: var(--hairline-strong); }
+
+.value-num {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--gold-soft);
+  flex-shrink: 0;
+  padding-top: 2px;
+}
+
+.value-item p { font-size: 14.5px; color: var(--ink-dim); line-height: 1.65; }
+
+/* ===================== DOC HISTORY (warm phase) ===================== */
+
+.section-history {
+  padding: 72px 0 96px;
+}
+
+.doc-intro {
+  font-size: 16px;
+  color: var(--ink-dim);
+  line-height: 1.8;
+  max-width: 62ch;
+  margin-bottom: 52px;
+}
+
+.timeline { display: flex; flex-direction: column; }
+
+.timeline-item {
+  display: grid;
+  grid-template-columns: 148px 1px 1fr;
+  gap: 0 36px;
+  padding-bottom: 48px;
+}
+
+.timeline-item:last-child { padding-bottom: 0; }
+
+.timeline-meta { text-align: right; padding-top: 4px; }
+
+.timeline-version {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--gold-soft);
+  margin-bottom: 4px;
+}
+
+.timeline-date { font-size: 12px; color: var(--ink-faint); }
+
+.timeline-line {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.timeline-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--gold);
+  flex-shrink: 0;
+  margin-top: 6px;
+}
+
+.timeline-connector {
+  flex: 1;
+  width: 1px;
+  background: var(--hairline-strong);
+  margin-top: 6px;
+}
+
+.timeline-item:last-child .timeline-connector { display: none; }
+
+.timeline-content { padding-top: 2px; }
+
+.timeline-content h4 {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.timeline-content p {
+  font-size: 14px;
+  color: var(--ink-dim);
+  line-height: 1.65;
+}
+
+.timeline-reviewer {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12px;
+  color: var(--ink-faint);
+  margin-top: 12px;
+  padding: 5px 12px;
+  border: 1px solid var(--hairline);
+  border-radius: 999px;
+}
+
+.timeline-reviewer::before {
+  content: '';
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--steel);
+}
+
+/* ===================== CLOSING (warm phase) ===================== */
+
+.closing {
+  padding: 120px 0 96px;
+  text-align: center;
+  border-top: 1px solid var(--hairline);
+}
+
+.closing h2 {
+  font-size: clamp(36px, 5.5vw, 60px);
+  letter-spacing: -.025em;
+  margin-bottom: 24px;
+}
+
+.closing h2 em {
+  font-style: italic;
+  color: var(--gold);
+  font-weight: 500;
+}
+
+.closing-rule {
+  width: 48px;
+  height: 2px;
+  background: var(--gold);
+  border-radius: 2px;
+  margin: 0 auto 28px;
+}
+
+.closing-name { font-size: 15px; color: var(--ink-dim); margin-bottom: 4px; }
+.closing-role { font-size: 13px; color: var(--ink-faint); }
+
+/* ===================== FOOTER ===================== */
+
+footer {
+  border-top: 1px solid var(--hairline);
+  padding: 28px 0;
+}
+
+footer .wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  color: var(--ink-faint);
+}
+
+/* ===================== RESPONSIVE ===================== */
+
+@media (max-width: 900px) {
+  .wrap { padding: 0 24px; }
+  .chapter-connector { padding: 0 24px; }
+  .stat-row         { grid-template-columns: repeat(2, 1fr); }
+  .pain-grid        { grid-template-columns: 1fr; gap: 12px; }
+  .obj-grid         { grid-template-columns: 1fr; gap: 40px; }
+  .inputs-grid      { grid-template-columns: 1fr; }
+  .rpa-grid         { grid-template-columns: 1fr; }
+  .security-two-col { grid-template-columns: 1fr; }
+  .archival-grid    { grid-template-columns: 1fr; }
+  .value-grid       { grid-template-columns: 1fr; }
+  .flow-row         { flex-direction: column; }
+  .flow-arrow       { transform: rotate(90deg); height: 30px; justify-content: center; }
+  .timeline-item    { grid-template-columns: 100px 1px 1fr; gap: 0 20px; }
+}
+
+@media (max-width: 600px) {
+  .scope-grid { grid-template-columns: 1fr; }
+  .timeline-item { grid-template-columns: 80px 1px 1fr; }
+  .section-problem, .section-objectives, .section-baseline,
+  .section-solution, .section-security, .section-value, .section-history {
+    padding-top: 56px; padding-bottom: 64px;
+  }
+  .bridge { padding: 80px 0; }
+  .hero { padding: 72px 0 64px; }
+}
+
+@media (max-width: 375px) {
+  .wrap { padding: 0 16px; }
+  .chapter-connector { padding: 0 16px; }
+  .stat-row { grid-template-columns: 1fr; }
+}
+
+</style>
+</head>
+<body>
+
+
+<!-- ================================================================
+     PHASE 1 — COLD   (Hero + Problem)
+     ================================================================ -->
+<div class="phase phase-cold">
+
+  <!-- ---- HERO ---- -->
+  <div class="hero">
+    <div class="wrap">
+
+      <div class="hero-badge">
+        <span class="dot"></span>
+        Platform Architecture Case Study &nbsp;·&nbsp; Agri-FinTech SaaS
+      </div>
+
+      <h1>Subsid<em>ex</em></h1>
+
+      <p class="hero-tagline">
+        A multi-tenant SaaS platform I architected to automate India's fertilizer subsidy claims chain — replacing manual government-portal reconciliation with RPA-driven data capture, real-time stakeholder nudges, and role-based analytics.
+      </p>
+
+      <p class="hero-meta">
+        Solution Architect &amp; Product Owner &nbsp;·&nbsp; Architecture note v1.0 → v1.2 &nbsp;·&nbsp; Mar – Jul 2020
+      </p>
+
+      <div class="stat-row">
+        <div class="stat-card">
+          <div class="stat-num">2</div>
+          <div class="stat-label">Govt. portals automated — iFMS &amp; MFMS</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">120+</div>
+          <div class="stat-label">Days in the legacy claims cycle after DBT</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">5</div>
+          <div class="stat-label">Stakeholder tiers in the acknowledgement chain</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">3</div>
+          <div class="stat-label">Reviewed architecture revisions</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- chapter connector -->
+  <div class="chapter-connector" style="margin-top: 0; margin-bottom: 0; padding-top: 8px; padding-bottom: 8px;">
+    <div class="chapter-line"></div>
+    <span class="chapter-label">The problem</span>
+    <div class="chapter-line"></div>
+  </div>
+
+  <!-- ---- PROBLEM ---- -->
+  <section class="section-problem">
+    <div class="wrap">
+
+      <div class="section-head">
+        <p class="eyebrow">The Problem</p>
+        <h2>Every handover needs a government-portal acknowledgement</h2>
+      </div>
+
+      <p class="problem-intro">
+        India's fertilizer subsidy is paid by the government directly to manufacturers, but only once every handover in the <strong>plant → rake point → wholesaler → retailer → farmer</strong> chain is acknowledged on a government portal. DBT stretched that reconciliation cycle from under 30 days to <strong>120+</strong>, and the entire process was still being run by hand.
+      </p>
+
+      <div class="pain-grid">
+        <div class="pain-card">
+          <div class="pain-num">01</div>
+          <h3>Data moves faster than people can read it</h3>
+          <p>The government portal updates constantly, but companies were only pulling it weekly or fortnightly.</p>
+        </div>
+        <div class="pain-card">
+          <div class="pain-num">02</div>
+          <h3>Manual consolidation, manual errors</h3>
+          <p>MIS teams hand-downloaded reports and rebuilt pending-acknowledgement lists in Excel — every step open to error.</p>
+        </div>
+        <div class="pain-card">
+          <div class="pain-num">03</div>
+          <h3>Field officers act on stale data</h3>
+          <p>By the time a nudge reached a wholesaler or retailer, the numbers behind it were already out of date.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</div><!-- /phase-cold -->
+
+
+<!-- ================================================================
+     BRIDGE 1 — Cold → Shift
+     ================================================================ -->
+<div class="bridge bridge-cold-shift">
+  <div class="wrap bridge-inner">
+    <div class="pq-rule"></div>
+    <blockquote class="pull-quote">"120+ days.<br>Still run by hand."</blockquote>
+    <p class="narrative-bridge">The problem wasn't new technology or missing data. It was that every piece of it was moving through human hands — slowly, inconsistently, with no visibility into what was falling through the cracks. The architecture needed to fix all of that at once.</p>
+  </div>
+</div>
+
+
+<!-- ================================================================
+     PHASE 2 — SHIFT   (Objectives + Baseline)
+     ================================================================ -->
+<div class="phase phase-shift">
+
+  <!-- ---- OBJECTIVES ---- -->
+  <section class="section-objectives">
+    <div class="wrap">
+
+      <div class="section-head">
+        <p class="eyebrow">Objectives</p>
+        <h2>What the platform had to be true to</h2>
+        <p>I framed the business case around three outcomes, then translated each into architectural commitments before writing a line of the design.</p>
+      </div>
+
+      <div class="obj-grid">
+
+        <div class="obj-col">
+          <h3>Business Outcomes</h3>
+          <div class="outcome-cards">
+            <div class="outcome-card">
+              <div class="outcome-num">01</div>
+              <div>
+                <h4>Working Capital</h4>
+                <p>Cut the subsidy claims cycle by driving faster stock-receipt acknowledgements and surfacing long-standing inventory for liquidation.</p>
+              </div>
+            </div>
+            <div class="outcome-card">
+              <div class="outcome-num">02</div>
+              <div>
+                <h4>Field Efficiency</h4>
+                <p>Automate the repetitive admin work field officers were doing so their time goes back into direct selling.</p>
+              </div>
+            </div>
+            <div class="outcome-card">
+              <div class="outcome-num">03</div>
+              <div>
+                <h4>Market Intelligence</h4>
+                <p>Turn the same portal data into production planning, sales strategy, and competitive insight for the manufacturer.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="obj-col">
+          <h3>Architectural Goals</h3>
+          <div class="arch-goals">
+            <div class="arch-goal"><span class="arch-goal-num">01</span>Pull data from iFMS &amp; MFMS on a regular, automated cadence via web automation.</div>
+            <div class="arch-goal"><span class="arch-goal-num">02</span>Clean, parse, and persist that data against real business requirements.</div>
+            <div class="arch-goal"><span class="arch-goal-num">03</span>Process it against defined business KPIs, not raw dumps.</div>
+            <div class="arch-goal"><span class="arch-goal-num">04</span>Notify every stakeholder per predefined workflows and rules.</div>
+            <div class="arch-goal"><span class="arch-goal-num">05</span>Build for portal downtime — a fault-resilient platform, not a fragile one.</div>
+            <div class="arch-goal"><span class="arch-goal-num">06</span>Scale horizontally as subsidy volumes grow.</div>
+            <div class="arch-goal"><span class="arch-goal-num">07</span>Give stakeholders visibility into job execution, with alerts on failure.</div>
+            <div class="arch-goal"><span class="arch-goal-num">08</span>Surface automated, intelligent KPI dashboards for the sales-and-stock lifecycle.</div>
+            <div class="arch-goal"><span class="arch-goal-num">09</span>Let business users manually trigger and pull reports on demand.</div>
+            <div class="arch-goal"><span class="arch-goal-num">10</span>Keep every tenant's data secure and logically isolated.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- chapter connector -->
+  <div class="chapter-connector" style="padding-top:8px;padding-bottom:8px;">
+    <div class="chapter-line"></div>
+    <span class="chapter-label">The baseline</span>
+    <div class="chapter-line"></div>
+  </div>
+
+  <!-- ---- BASELINE ---- -->
+  <section class="section-baseline">
+    <div class="wrap">
+
+      <div class="section-head">
+        <p class="eyebrow">Before Subsidex</p>
+        <h2>There was no system to displace. Just a habit.</h2>
+      </div>
+
+      <p class="baseline-intro">
+        Most companies had no software here at all — MIS teams manually pulled government data weekly or fortnightly and curated it in spreadsheets to decide what the field force should chase next.
+      </p>
+
+      <div class="flow-row">
+        <div class="flow-step">
+          <div class="flow-step-tag">Extract</div>
+          <p>Manual download from the Govt. portal, weekly or fortnightly.</p>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-step-tag">Curate</div>
+          <p>Consolidated by hand or in Excel into a pending-action list.</p>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-step-tag">Push</div>
+          <p>Actionables emailed out to the field force.</p>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-step-tag">Repeat</div>
+          <p>Errors and staleness compounding at every cycle.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</div><!-- /phase-shift -->
+
+
+<!-- ================================================================
+     BRIDGE 2 — Shift → Build
+     ================================================================ -->
+<div class="bridge bridge-shift-build">
+  <div class="wrap bridge-inner">
+    <div class="pq-rule"></div>
+    <blockquote class="pull-quote">"There was no system<br>to displace.<br>Just a habit."</blockquote>
+    <p class="narrative-bridge">Before proposing anything new, I needed to understand what we were replacing. Not a system — a process. No migration path. No legacy data to preserve. We were building from zero, onto live ground.</p>
+  </div>
+</div>
+
+
+<!-- ================================================================
+     PHASE 3 — BUILD   (Solution)
+     ================================================================ -->
+<div class="phase phase-build">
+
+  <section class="section-solution">
+    <div class="wrap">
+
+      <div class="section-head">
+        <p class="eyebrow">Proposed Solution</p>
+        <h2>Twelve capabilities. One coherent platform.</h2>
+      </div>
+
+      <!-- Scope -->
+      <div class="solution-sub">
+        <div class="sub-label">Scope of v1</div>
+        <div class="scope-grid">
+          <div class="scope-item"><span class="scope-num">01</span>RPA-driven report downloads from the Govt. portal</div>
+          <div class="scope-item"><span class="scope-num">02</span>Configurable download frequency &amp; timing</div>
+          <div class="scope-item"><span class="scope-num">03</span>Automated captcha resolution on login</div>
+          <div class="scope-item"><span class="scope-num">04</span>Consolidation &amp; merge of same-report files into the DB</div>
+          <div class="scope-item"><span class="scope-num">05</span>Retry mechanisms for portal flakiness</div>
+          <div class="scope-item"><span class="scope-num">06</span>Master data management</div>
+          <div class="scope-item"><span class="scope-num">07</span>Business logic implementation</div>
+          <div class="scope-item"><span class="scope-num">08</span>Isolated, secure tenant-specific data</div>
+          <div class="scope-item"><span class="scope-num">09</span>Historical consolidation with per-tenant archival policy</div>
+          <div class="scope-item"><span class="scope-num">10</span>Role-based access per authorisation</div>
+          <div class="scope-item"><span class="scope-num">11</span>UI for monitoring processing status</div>
+          <div class="scope-item"><span class="scope-num">12</span>SMS &amp; email integrations</div>
+        </div>
+      </div>
+
+      <!-- Design Inputs -->
+      <div class="solution-sub">
+        <div class="sub-label">Assumptions &amp; Constraints I Designed Against</div>
+        <div class="inputs-grid">
+          <div class="inputs-col">
+            <h4>Assumptions</h4>
+            <ul>
+              <li>Data is available on the Govt. portals in the first place.</li>
+              <li>iFMS &amp; MFMS refresh before 8 AM daily.</li>
+              <li>Notifications route via SMS, email, or the Khaad Dealer App.</li>
+              <li>Analytics access sits behind a separate re-login for that platform.</li>
+            </ul>
+          </div>
+          <div class="inputs-col">
+            <h4>Constraints</h4>
+            <ul>
+              <li>Extraction is entirely dependent on portal uptime.</li>
+              <li>Data accuracy is capped by the accuracy of the source portal.</li>
+              <li>Any Govt. UI change means redevelopment of the scraping layer.</li>
+              <li>SMS &amp; email delivery both depend on third-party providers.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Application Architecture diagram -->
+      <div class="solution-sub">
+        <div class="sub-label">Application Architecture</div>
+        <p style="font-size:14px;color:var(--ink-dim);margin-bottom:24px;max-width:62ch;line-height:1.7;">The full module map — from RPA capture at the edge through to the analytics layer the business teams actually live in.</p>
+        <div class="arch-img-wrap">
+          <img src="../ppt/subsidex-images/image1.jpg" alt="Subsidex application architecture — full module map from RPA capture to analytics">
+          <div class="arch-img-cap">Application architecture — module map</div>
+        </div>
+      </div>
+
+      <!-- Integration & Infrastructure diagram -->
+      <div class="solution-sub">
+        <div class="sub-label">Integration &amp; Infrastructure Architecture</div>
+        <p style="font-size:14px;color:var(--ink-dim);margin-bottom:24px;max-width:62ch;line-height:1.7;">Hosted end-to-end on IBM Cloud infrastructure.</p>
+        <div class="arch-img-wrap">
+          <img src="../ppt/subsidex-images/image2.png" alt="Subsidex integration and infrastructure architecture on IBM Cloud">
+          <div class="arch-img-cap">Integration &amp; infrastructure architecture — IBM Cloud</div>
+        </div>
+      </div>
+
+      <!-- Data Flow -->
+      <div class="solution-sub">
+        <div class="sub-label">The Path a Single Scraped File Takes</div>
+        <div class="flow-list">
+          <div class="flow-step-row"><span class="flow-step-num">1</span><p>Subsidex is hosted and managed on IBM infrastructure as a cloud service.</p></div>
+          <div class="flow-step-row"><span class="flow-step-num">2</span><p>The Scheduler stays connected to the RPA agent over JNLP; scraping jobs run on independent slave servers.</p></div>
+          <div class="flow-step-row"><span class="flow-step-num">3</span><p>Files the RPA agent extracts are pushed to IBM file storage via the IBM SDK's REST API.</p></div>
+          <div class="flow-step-row"><span class="flow-step-num">4</span><p>That upload fires an event that publishes a message onto IBM MQ via JMS.</p></div>
+          <div class="flow-step-row"><span class="flow-step-num">5</span><p>The Data Processor is subscribed to that queue and pulls the matching file back down on arrival.</p></div>
+          <div class="flow-step-row"><span class="flow-step-num">6</span><p>The processor validates, maps, and cleans the data, persisting it into Postgres via JDBC, per-tenant schema.</p></div>
+          <div class="flow-step-row"><span class="flow-step-num">7</span><p>The same processor pushes the relevant data out over SMS and email via third-party APIs.</p></div>
+          <div class="flow-step-row"><span class="flow-step-num">8</span><p>The portal client calls the web server for anything a user needs on screen.</p></div>
+          <div class="flow-step-row"><span class="flow-step-num">9</span><p>The analytics dashboard reads straight from the relevant DB schemas through DB connectors.</p></div>
+          <div class="flow-step-row"><span class="flow-step-num">10</span><p>Dashboards themselves are built on Microsoft Power BI.</p></div>
+        </div>
+      </div>
+
+      <!-- RPA & Integrations -->
+      <div class="solution-sub">
+        <div class="sub-label">RPA Engine &amp; External Integrations</div>
+        <div class="rpa-grid">
+          <div class="rpa-col">
+            <h4>RPA Engine</h4>
+            <p class="rpa-desc">A custom Selenium-based framework, config-driven rather than script-per-portal.</p>
+            <div class="rpa-items">
+              <div class="rpa-item">
+                <h5>Config-driven scraping</h5>
+                <p>Every download job is defined via configuration, not custom code per source.</p>
+              </div>
+              <div class="rpa-item">
+                <h5>Built-in retries</h5>
+                <p>Failure detection and auto-retry are first-class, not bolted on.</p>
+              </div>
+              <div class="rpa-item">
+                <h5>NFR-aware</h5>
+                <p>Designed to absorb the Govt. portal's downtime and change velocity.</p>
+              </div>
+            </div>
+          </div>
+          <div class="rpa-col">
+            <h4>External Integrations</h4>
+            <p class="rpa-desc">&nbsp;</p>
+            <div class="rpa-items">
+              <div class="rpa-item">
+                <h5>SMS</h5>
+                <p>Third-party API integration to publish alerts to stakeholders.</p>
+              </div>
+              <div class="rpa-item">
+                <h5>Email</h5>
+                <p>Third-party provider for stakeholder email delivery.</p>
+              </div>
+              <div class="rpa-item">
+                <h5>Captcha resolver</h5>
+                <p>Automated third-party captcha solving on portal login.</p>
+              </div>
+              <div class="rpa-item">
+                <h5>Email tracker</h5>
+                <p>Read receipts, bounces, and delivery status tracking.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</div><!-- /phase-build -->
+
+
+<!-- ================================================================
+     BRIDGE 3 — Build → Guard
+     ================================================================ -->
+<div class="bridge bridge-build-guard">
+  <div class="wrap bridge-inner">
+    <div class="pq-rule"></div>
+    <blockquote class="pull-quote">"Ten steps.<br>Zero manual<br>intervention."</blockquote>
+    <p class="narrative-bridge">The architecture wasn't just sound on paper. It had to hold against government portal downtime, third-party failures, and a data pipeline that couldn't afford to lose a single file. Security came next — not as an afterthought, but baked into every decision that came before.</p>
+  </div>
+</div>
+
+
+<!-- ================================================================
+     PHASE 4 — GUARD   (Security)
+     ================================================================ -->
+<div class="phase phase-guard">
+
+  <section class="section-security">
+    <div class="wrap">
+
+      <div class="section-head">
+        <p class="eyebrow">Security &amp; Compliance</p>
+        <h2>Secure by design. Isolated by default.</h2>
+      </div>
+
+      <!-- Data Security -->
+      <div class="security-block">
+        <h3>Data Security</h3>
+        <div class="security-two-col">
+          <div class="security-bullets">
+            <div class="security-bullet">SSL encryption on all data in transit; encryption at rest with periodic key rotation.</div>
+            <div class="security-bullet">Portal credentials encrypted at storage — entered directly by the client, never visible to any person.</div>
+            <div class="security-bullet">AES-256 for critical data such as company iFMS credentials.</div>
+            <div class="security-bullet">OAuth-based access to the Subsidex portal, tokens valid for 30 minutes to bound any leak.</div>
+            <div class="security-bullet">A secure VPC around the entire platform, with client-managed role-based access via an admin portal.</div>
+          </div>
+          <div class="arch-img-wrap">
+            <img src="../ppt/subsidex-images/image3.png" alt="Data security architecture diagram">
+            <div class="arch-img-cap">Data security architecture</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Multi-tenancy -->
+      <div class="security-block">
+        <h3>Multi-Tenancy</h3>
+        <div class="security-two-col">
+          <div class="security-bullets">
+            <div class="security-bullet">Each client gets a separate schema — logical, not physical, isolation.</div>
+            <div class="security-bullet">Platform-level data lives in one shared schema that never carries client-specific data.</div>
+            <div class="security-bullet">All tenants share the same underlying infrastructure, scaled horizontally or vertically as needed.</div>
+          </div>
+          <div class="arch-img-wrap">
+            <img src="../ppt/subsidex-images/image4.png" alt="Multi-tenancy schema isolation diagram">
+            <div class="arch-img-cap">Multi-tenancy — schema-level isolation</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Archival, lifecycle, RBAC -->
+      <div class="security-block">
+        <h3>Archival, Account Lifecycle &amp; Access Control</h3>
+        <div class="archival-grid">
+          <div class="archival-card">
+            <h4>Archival &amp; Purging</h4>
+            <ul>
+              <li>Govt.-portal data persisted for a predefined period per data-set policy.</li>
+              <li>On contract termination, client data is retained 90 days, then purged.</li>
+            </ul>
+          </div>
+          <div class="archival-card">
+            <h4>Onboarding / Offboarding</h4>
+            <ul>
+              <li>Onboarding provisions a dedicated schema and admin accounts for the client.</li>
+              <li>Offboarding revokes all user access immediately; data persists 90 days before purge.</li>
+            </ul>
+          </div>
+          <div class="archival-card">
+            <h4>Role-Based Access</h4>
+            <ul>
+              <li>Client admins create roles with varied access levels.</li>
+              <li>Roles are assigned per employee to control what each person can reach.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</div><!-- /phase-guard -->
+
+
+<!-- ================================================================
+     BRIDGE 4 — Guard → Warm
+     ================================================================ -->
+<div class="bridge bridge-guard-warm">
+  <div class="wrap bridge-inner">
+    <div class="pq-rule"></div>
+    <blockquote class="pull-quote">"Every tenant's data:<br>isolated by design."</blockquote>
+    <p class="narrative-bridge">A platform carrying government credentials and financial reconciliation data had one non-negotiable: no tenant's data could ever touch another's. The security architecture answered that. Then it went further.</p>
+  </div>
+</div>
+
+
+<!-- ================================================================
+     PHASE 5 — WARM   (Value + History + Closing)
+     ================================================================ -->
+<div class="phase phase-warm">
+
+  <!-- ---- BUSINESS VALUE ---- -->
+  <section class="section-value">
+    <div class="wrap">
+
+      <div class="section-head">
+        <p class="eyebrow">Business Value</p>
+        <h2>What this was designed to be worth</h2>
+      </div>
+
+      <div class="value-grid">
+        <div class="value-item"><span class="value-num">01</span><p>Lower working capital pressure from a shorter subsidy claims cycle.</p></div>
+        <div class="value-item"><span class="value-num">02</span><p>Field staff spend less time on admin — stock acks and PoS liquidation drive themselves.</p></div>
+        <div class="value-item"><span class="value-num">03</span><p>Automation of critical steps for near-100% accuracy and consistency.</p></div>
+        <div class="value-item"><span class="value-num">04</span><p>Big-data consolidation from the Govt. portal for supply-chain and competitor visibility.</p></div>
+        <div class="value-item"><span class="value-num">05</span><p>A real communication channel across every stakeholder in the value chain.</p></div>
+        <div class="value-item"><span class="value-num">06</span><p>Better process and data management across previously disconnected systems.</p></div>
+        <div class="value-item"><span class="value-num">07</span><p>Reporting that used to take days, available on demand.</p></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- chapter connector -->
+  <div class="chapter-connector" style="padding-top:8px;padding-bottom:8px;">
+    <div class="chapter-line"></div>
+    <span class="chapter-label">The record</span>
+    <div class="chapter-line"></div>
+  </div>
+
+  <!-- ---- DOC HISTORY ---- -->
+  <section class="section-history">
+    <div class="wrap">
+
+      <div class="section-head">
+        <p class="eyebrow">Document Credentials</p>
+        <h2>Three revisions, four months, two reviewers</h2>
+      </div>
+
+      <p class="doc-intro">
+        This architecture note wasn't written once — it was pressure-tested and revised as the design matured, each version reviewed by a peer engineer before it shipped.
+      </p>
+
+      <div class="timeline">
+
+        <div class="timeline-item">
+          <div class="timeline-meta">
+            <div class="timeline-version">v1.0</div>
+            <div class="timeline-date">24 Mar 2020</div>
+          </div>
+          <div class="timeline-line">
+            <div class="timeline-dot"></div>
+            <div class="timeline-connector"></div>
+          </div>
+          <div class="timeline-content">
+            <h4>Initial Draft</h4>
+            <p>Baseline architecture — foundational module map, integration layer, and data flow.</p>
+            <span class="timeline-reviewer">Reviewed by Irshad Chohan</span>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-meta">
+            <div class="timeline-version">v1.1</div>
+            <div class="timeline-date">15 May 2020</div>
+          </div>
+          <div class="timeline-line">
+            <div class="timeline-dot"></div>
+            <div class="timeline-connector"></div>
+          </div>
+          <div class="timeline-content">
+            <h4>Added Multi-Tenancy Architecture</h4>
+            <p>Introduced schema-level tenant isolation — each client gets a dedicated schema provisioned on onboarding.</p>
+            <span class="timeline-reviewer">Reviewed by Onkar Pradhan</span>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-meta">
+            <div class="timeline-version">v1.2</div>
+            <div class="timeline-date">10 Jul 2020</div>
+          </div>
+          <div class="timeline-line">
+            <div class="timeline-dot"></div>
+            <div class="timeline-connector"></div>
+          </div>
+          <div class="timeline-content">
+            <h4>Improved Data Security Architecture</h4>
+            <p>Hardened encryption, OAuth token scoping, and VPC design — the final production-ready revision.</p>
+            <span class="timeline-reviewer">Reviewed by Onkar Pradhan</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ---- CLOSING ---- -->
+  <div class="closing">
+    <div class="wrap">
+      <p class="eyebrow" style="margin-bottom:22px;">Subsidex &nbsp;·&nbsp; Platform Architecture Case Study</p>
+      <h2>Thank <em>you</em></h2>
+      <div class="closing-rule"></div>
+      <p class="closing-name">Dhruvi Chauhan</p>
+      <p class="closing-role">Business Analyst, Neebal Technologies</p>
+    </div>
+  </div>
+
+</div><!-- /phase-warm -->
+
+
+<!-- ================================================================
+     FOOTER
+     ================================================================ -->
+<footer>
+  <div class="wrap">
+    <span>Subsidex · Architecture Case Study · Mar–Jul 2020</span>
+    <span>Dhruvi Chauhan</span>
+  </div>
+</footer>
+
+
+</body>
+</html>

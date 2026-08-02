@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Digital Naari — Product Case Study · Dhruvi Chauhan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..600&family=Space+Grotesk:wght@400..700&family=Public+Sans:wght@300..600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy-950: #101018;
+    --navy-900: #15151F;
+    --navy-800: rgba(255,255,255,.03);
+    --navy-700: rgba(255,255,255,.06);
+    --hairline: rgba(255,255,255,.08);
+    --hairline-strong: rgba(255,255,255,.16);
+    --gold: #7C6FF0;
+    --gold-soft: #9D93F5;
+    --steel: #45C4B0;
+    --steel-soft: #8FE0D4;
+    --ink: #EDEBF5;
+    --ink-dim: #B4B1C7;
+    --ink-faint: #8B889E;
+    --coral: #F0806F;
+    --coral-soft: #F5A99D;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background: var(--navy-950);
+    color: var(--ink);
+    font-family: 'Public Sans', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.55;
+  }
+
+  h1, h2, h3, h4 { font-family: 'Space Grotesk', sans-serif; font-weight: 700; margin: 0; }
+  p { margin: 0; }
+  a { color: inherit; }
+  ::selection { background: var(--gold); color: var(--navy-950); }
+
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 48px; }
+
+  .eyebrow {
+    font-size: 11px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+  }
+
+  /* ---- HERO ---- */
+  .hero { padding: 72px 0 56px; position: relative; overflow: hidden; }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -200px; right: -100px;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(124,111,240,.12), transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -100px; left: -200px;
+    width: 500px; height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(69,196,176,.08), transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-inner { position: relative; z-index: 1; }
+
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 11px; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--steel-soft);
+    border: 1px solid var(--hairline-strong);
+    padding: 8px 16px; border-radius: 999px;
+    margin-bottom: 22px;
+    font-family: 'Space Grotesk', sans-serif;
+  }
+
+  .hero-badge .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
+
+  .hero h1 {
+    font-size: clamp(40px, 6.2vw, 72px);
+    font-weight: 700;
+    letter-spacing: -.03em;
+    line-height: 1.03;
+    margin-bottom: 20px;
+  }
+
+  .hero h1 em { font-style: italic; color: var(--gold); font-weight: 500; }
+
+  .hero-desc {
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-size: 19px;
+    line-height: 1.6;
+    color: var(--ink-dim);
+    max-width: 68ch;
+    margin-bottom: 10px;
+  }
+
+  .hero-meta { font-size: 13px; color: var(--ink-faint); letter-spacing: .02em; margin-bottom: 40px; }
+
+  .stat-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+
+  .stat-card {
+    background: var(--navy-900);
+    border: 1px solid var(--hairline);
+    border-radius: 14px;
+    padding: 24px 20px;
+    transition: border-color .2s;
+  }
+
+  .stat-card:hover { border-color: var(--hairline-strong); }
+
+  .stat-num {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 38px;
+    font-weight: 700;
+    color: var(--gold-soft);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .stat-label { font-size: 12.5px; color: var(--ink-faint); line-height: 1.4; }
+
+  /* ---- SECTIONS ---- */
+  section { padding: 64px 0; border-top: 1px solid var(--hairline); }
+
+  .section-head { margin-bottom: 32px; }
+  .section-head .eyebrow { margin-bottom: 10px; }
+  .section-head h2 { font-size: clamp(28px, 4vw, 40px); letter-spacing: -.02em; line-height: 1.15; margin-bottom: 12px; }
+  .section-head p { font-size: 16px; color: var(--ink-dim); max-width: 64ch; line-height: 1.6; }
+
+  /* ---- PROBLEM ---- */
+  .problem-intro { font-size: 16px; color: var(--ink-dim); line-height: 1.65; max-width: 72ch; margin-bottom: 32px; }
+  .problem-intro strong { color: var(--ink); }
+
+  .pain-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+
+  .pain-card {
+    background: var(--navy-900);
+    border: 1px solid var(--hairline);
+    border-radius: 16px;
+    padding: 28px 24px;
+    position: relative;
+  }
+
+  .pain-num {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .14em;
+    color: var(--gold);
+    margin-bottom: 14px;
+  }
+
+  .pain-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 10px; line-height: 1.3; }
+  .pain-card p { font-size: 14px; color: var(--ink-dim); line-height: 1.7; }
+
+  /* ---- ROLE / PROCESS ---- */
+  .role-intro { font-size: 16px; color: var(--ink-dim); line-height: 1.65; max-width: 72ch; margin-bottom: 32px; }
+
+  .process-row { display: flex; align-items: stretch; gap: 0; margin-bottom: 28px; }
+
+  .process-step {
+    flex: 1;
+    background: var(--navy-900);
+    border: 1px solid var(--hairline);
+    border-radius: 14px;
+    padding: 26px 22px;
+    position: relative;
+  }
+
+  .process-num {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .14em;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+
+  .process-step h4 { font-size: 15.5px; font-weight: 700; margin-bottom: 8px; }
+  .process-step p { font-size: 13.5px; color: var(--ink-dim); line-height: 1.6; }
+
+  .process-arrow { display: flex; align-items: center; padding: 0 10px; color: var(--ink-faint); font-size: 18px; flex-shrink: 0; }
+
+  .skills-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .skill-pill {
+    font-size: 12.5px;
+    color: var(--steel-soft);
+    border: 1px solid var(--hairline-strong);
+    padding: 7px 14px;
+    border-radius: 999px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+  }
+
+  /* ---- DIAGNOSIS ---- */
+  .diagnosis-intro { font-size: 16px; color: var(--ink-dim); line-height: 1.65; max-width: 72ch; margin-bottom: 32px; }
+
+  .diagnosis-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+
+  .diagnosis-card {
+    background: var(--navy-900);
+    border: 1px solid var(--hairline);
+    border-radius: 16px;
+    padding: 26px 24px;
+  }
+
+  .diagnosis-num {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .14em;
+    color: var(--coral-soft);
+    margin-bottom: 14px;
+  }
+
+  .diagnosis-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 10px; line-height: 1.3; }
+  .diagnosis-card p { font-size: 14px; color: var(--ink-dim); line-height: 1.7; }
+
+  /* ---- STAKEHOLDERS ---- */
+  .stake-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+
+  .stake-card {
+    background: var(--navy-900);
+    border: 1px solid var(--hairline);
+    border-radius: 14px;
+    padding: 22px 18px;
+  }
+
+  .stake-num {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+
+  .stake-card h4 { font-size: 14.5px; font-weight: 700; margin-bottom: 8px; line-height: 1.3; }
+  .stake-card p { font-size: 13px; color: var(--ink-dim); line-height: 1.55; }
+
+  /* ---- SOLUTION SHARED ---- */
+  .solution-subsection { margin-bottom: 44px; }
+  .solution-subsection:last-child { margin-bottom: 0; }
+
+  .subsection-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--steel);
+    margin-bottom: 24px;
+  }
+
+  .solution-intro { font-size: 16px; color: var(--ink-dim); line-height: 1.65; max-width: 72ch; margin-bottom: 32px; }
+
+  /* ---- STATE DIAGRAM (before / after) ---- */
+  .flow-row { display: flex; align-items: stretch; gap: 0; }
+
+  .flow-step {
+    flex: 1;
+    background: var(--navy-900);
+    border: 1px solid var(--hairline);
+    border-radius: 14px;
+    padding: 22px 16px;
+    text-align: center;
+  }
+
+  .flow-step-tag {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  .flow-step.is-broken { border-color: rgba(240,128,111,.4); background: rgba(240,128,111,.06); }
+  .flow-step.is-broken .flow-step-tag { color: var(--coral-soft); }
+  .flow-step.is-fixed { border-color: rgba(69,196,176,.35); background: rgba(69,196,176,.06); }
+  .flow-step.is-fixed .flow-step-tag { color: var(--steel-soft); }
+
+  .flow-arrow { display: flex; align-items: center; padding: 0 8px; color: var(--ink-faint); font-size: 16px; flex-shrink: 0; }
+  .flow-arrow.is-break { color: var(--coral-soft); font-size: 20px; }
+
+  .flow-caption {
+    font-size: 13.5px;
+    color: var(--ink-faint);
+    font-style: italic;
+    margin-top: 16px;
+    max-width: 60ch;
+  }
+
+  .flow-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 14px;
+  }
+
+  .outcome-banner {
+    margin-top: 28px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    padding: 18px 20px;
+    background: var(--navy-800);
+    border: 1px solid var(--hairline);
+    border-radius: 12px;
+  }
+
+  .outcome-banner .tag {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--steel);
+    flex-shrink: 0;
+    padding-top: 2px;
+  }
+
+  .outcome-banner p { font-size: 14px; color: var(--ink-dim); line-height: 1.6; }
+
+  /* ---- DASHBOARD (Solution 2) ---- */
+  .dash-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+
+  .dash-col {
+    background: var(--navy-900);
+    border: 1px solid var(--hairline);
+    border-radius: 16px;
+    padding: 26px 24px;
+  }
+
+  .dash-col h4 {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+
+  .dash-col .dash-desc { font-size: 13.5px; color: var(--ink-faint); margin-bottom: 20px; font-style: italic; line-height: 1.5; }
+
+  .dash-stat-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px; }
+
+  .dash-stat {
+    background: var(--navy-800);
+    border: 1px solid var(--hairline);
+    border-radius: 10px;
+    padding: 14px 10px;
+    text-align: center;
+  }
+
+  .dash-stat-num { font-family: 'Space Grotesk', sans-serif; font-size: 20px; font-weight: 700; color: var(--gold-soft); }
+  .dash-stat-label { font-size: 10.5px; color: var(--ink-faint); line-height: 1.3; margin-top: 4px; }
+
+  .flag-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+
+  .flag-item {
+    font-size: 13px;
+    color: var(--ink-dim);
+    font-family: 'Space Grotesk', sans-serif;
+    padding: 10px 14px;
+    background: var(--navy-800);
+    border: 1px solid var(--hairline);
+    border-radius: 8px;
+  }
+
+  .bulk-btn {
+    display: inline-block;
+    font-size: 12.5px;
+    font-weight: 600;
+    font-family: 'Space Grotesk', sans-serif;
+    color: var(--navy-950);
+    background: var(--gold-soft);
+    padding: 10px 18px;
+    border-radius: 8px;
+  }
+
+  /* ---- EXCEPTION FLOWS (Solution 3&4) ---- */
+  .exception-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+
+  .exception-col {
+    background: var(--navy-900);
+    border: 1px solid var(--hairline);
+    border-radius: 16px;
+    padding: 26px 24px;
+  }
+
+  .exception-col h4 {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+  }
+
+  .exception-steps { display: flex; flex-direction: column; gap: 0; }
+
+  .exception-step {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--hairline);
+  }
+
+  .exception-step:last-child { border-bottom: none; }
+
+  .exception-step-num {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--steel);
+    flex-shrink: 0;
+    width: 20px;
+    padding-top: 2px;
+  }
+
+  .exception-step p { font-size: 13.5px; color: var(--ink-dim); line-height: 1.6; }
+
+  .exception-note {
+    margin-top: 24px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    padding: 16px 20px;
+    background: var(--navy-800);
+    border: 1px solid var(--hairline);
+    border-radius: 12px;
+    font-size: 13.5px;
+    color: var(--ink-dim);
+    line-height: 1.6;
+  }
+
+  /* ---- SUMMARY TABLE ---- */
+  .summary-table { display: flex; flex-direction: column; border: 1px solid var(--hairline); border-radius: 16px; overflow: hidden; }
+
+  .summary-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0;
+    border-bottom: 1px solid var(--hairline);
+  }
+
+  .summary-row:last-child { border-bottom: none; }
+
+  .summary-row.head {
+    background: var(--navy-900);
+  }
+
+  .summary-row.head .summary-cell {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+
+  .summary-cell {
+    padding: 20px 24px;
+    font-size: 13.5px;
+    color: var(--ink-dim);
+    line-height: 1.55;
+    border-right: 1px solid var(--hairline);
+  }
+
+  .summary-cell:last-child { border-right: none; }
+
+  .summary-row:not(.head):nth-child(even) { background: var(--navy-800); }
+
+  .summary-cell.outcome-cell { color: var(--steel-soft); }
+
+  /* ---- IMPACT ---- */
+  .impact-callout {
+    margin-top: 28px;
+    display: flex;
+    gap: 24px;
+    align-items: center;
+    padding: 28px 28px;
+    background: var(--navy-900);
+    border: 1px solid var(--hairline);
+    border-radius: 16px;
+  }
+
+  .impact-callout .stat-num { font-size: 44px; }
+
+  .impact-callout p { font-size: 14.5px; color: var(--ink-dim); line-height: 1.65; }
+
+  .impact-context {
+    margin-top: 24px;
+    font-size: 14px;
+    color: var(--ink-faint);
+    line-height: 1.7;
+    max-width: 80ch;
+    font-style: italic;
+  }
+
+  /* ---- RISKS ---- */
+  .risk-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+
+  .risk-card {
+    background: var(--navy-900);
+    border: 1px solid var(--hairline);
+    border-radius: 16px;
+    padding: 26px 24px;
+  }
+
+  .risk-card h3 { font-size: 15.5px; font-weight: 700; margin-bottom: 10px; line-height: 1.3; color: var(--coral-soft); }
+  .risk-card p { font-size: 14px; color: var(--ink-dim); line-height: 1.7; }
+
+  /* ---- CLOSING ---- */
+  .closing { padding: 64px 0; border-top: 1px solid var(--hairline); text-align: center; }
+
+  .closing h2 { font-size: clamp(36px, 5vw, 56px); letter-spacing: -.02em; margin-bottom: 20px; color: var(--ink); }
+  .closing h2 em { font-style: italic; color: var(--gold); font-weight: 500; }
+
+  .closing-name { font-size: 15px; color: var(--ink-dim); margin-bottom: 4px; }
+  .closing-role { font-size: 13px; color: var(--ink-faint); }
+
+  .closing-rule { width: 48px; height: 2px; background: var(--gold); border-radius: 2px; margin: 28px auto 28px; }
+
+  /* ---- FOOTER ---- */
+  footer { border-top: 1px solid var(--hairline); padding: 28px 0; }
+
+  footer .wrap { display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: var(--ink-faint); }
+
+  /* ---- RESPONSIVE ---- */
+  @media (max-width: 900px) {
+    .wrap { padding: 0 24px; }
+    .stat-row { grid-template-columns: repeat(2, 1fr); }
+    .pain-grid { grid-template-columns: 1fr; }
+    .diagnosis-grid { grid-template-columns: 1fr; }
+    .stake-grid { grid-template-columns: repeat(2, 1fr); }
+    .dash-grid { grid-template-columns: 1fr; }
+    .exception-grid { grid-template-columns: 1fr; }
+    .risk-grid { grid-template-columns: 1fr; }
+    .process-row { flex-direction: column; gap: 12px; }
+    .process-arrow { transform: rotate(90deg); height: 24px; justify-content: center; }
+    .flow-row { flex-direction: column; gap: 10px; }
+    .flow-arrow { transform: rotate(90deg); height: 24px; justify-content: center; }
+    .summary-row { grid-template-columns: 1fr; }
+    .summary-cell { border-right: none; border-bottom: 1px solid var(--hairline); }
+    .summary-cell:last-child { border-bottom: none; }
+    .impact-callout { flex-direction: column; align-items: flex-start; }
+  }
+
+  @media (max-width: 600px) {
+    .stat-row { grid-template-columns: 1fr 1fr; }
+    .stake-grid { grid-template-columns: 1fr; }
+    .dash-stat-row { grid-template-columns: 1fr; }
+    section { padding: 44px 0; }
+    .hero { padding: 48px 0 40px; }
+  }
+
+  @media (max-width: 375px) {
+    .wrap { padding: 0 16px; }
+    .stat-row { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<body>
+
+<!-- ============================================================ HERO -->
+<div class="hero">
+  <div class="wrap hero-inner">
+
+    <div class="hero-badge">
+      <span class="dot"></span>
+      Product Case Study &nbsp;·&nbsp; Financial Inclusion &amp; Commerce Platform
+    </div>
+
+    <h1>Digital <em>Naari</em></h1>
+
+    <p class="hero-desc">
+      Product strategy and launch of a financial inclusion and commerce platform for last-mile women — designed SheCommerce, Fixed Deposits, and Mutual Funds as gender-responsive product pillars, distributed through a network of women Business Correspondents.
+    </p>
+
+    <p class="hero-meta">Dhruvi Chauhan — Product Manager &nbsp;·&nbsp; PayNearby × Digital Naari Platform</p>
+
+    <div class="stat-row">
+      <div class="stat-card">
+        <div class="stat-num">25K+</div>
+        <div class="stat-label">Active users onboarded to the platform</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">₹2Cr+</div>
+        <div class="stat-label">Quarterly GTV across commerce &amp; financial services</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">3</div>
+        <div class="stat-label">Product pillars scaled under one platform</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">66%</div>
+        <div class="stat-label">Higher transaction value via women agents</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ============================================================ PROBLEM -->
+<section id="problem">
+  <div class="wrap">
+
+    <div class="section-head">
+      <p class="eyebrow">The Problem</p>
+      <h2>Formal financial products weren't designed for her</h2>
+    </div>
+
+    <p class="problem-intro">
+      Women make up roughly <strong>10% of India's Business Correspondent agents</strong>, and formal product adoption among women customers — savings, credit, insurance, investments — stayed low despite women holding <strong>55.6% of all PMJDY accounts</strong>. Existing products assumed steady income, easy bank access, and comfort transacting with male agents — none of which matched last-mile women's reality.
+    </p>
+
+    <div class="pain-grid">
+      <div class="pain-card">
+        <div class="pain-num">01 · RIGID SAVINGS PRODUCTS</div>
+        <h3>Formal savings demanded large, fixed deposits</h3>
+        <p>Women saved informally through gold, chit funds, and SHGs because formal products didn't flex to irregular, small-ticket income.</p>
+      </div>
+      <div class="pain-card">
+        <div class="pain-num">02 · TRUST &amp; DELIVERY GAPS</div>
+        <h3>E-commerce and investing stayed out of reach</h3>
+        <p>5–7 km delivery gaps and low digital confidence kept women from acting on demand they clearly had for both commerce and formal investing.</p>
+      </div>
+      <div class="pain-card">
+        <div class="pain-num">03 · MALE-DEFAULT DISTRIBUTION</div>
+        <h3>Only ~10% of BC agents were women</h3>
+        <p>Female customers transact up to 66% higher values with female agents, yet the agent network wasn't built to reflect that preference.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================ MY ROLE -->
+<section id="role">
+  <div class="wrap">
+
+    <div class="section-head">
+      <p class="eyebrow">My Role</p>
+      <h2>How I approached it</h2>
+      <p>I led product strategy and launch of Digital Naari end to end — from field research through to scaled adoption across three product pillars.</p>
+    </div>
+
+    <div class="process-row">
+      <div class="process-step">
+        <div class="process-num">01</div>
+        <h4>Research</h4>
+        <p>Grounded every product decision in field research — FGDs, an agent survey, industry data — rather than assumptions.</p>
+      </div>
+      <div class="process-arrow">→</div>
+      <div class="process-step">
+        <div class="process-num">02</div>
+        <h4>Design</h4>
+        <p>Designed SheCommerce, Fixed Deposits, and Mutual Funds around goal-linked, flexible, agent-assisted principles.</p>
+      </div>
+      <div class="process-arrow">→</div>
+      <div class="process-step">
+        <div class="process-num">03</div>
+        <h4>Launch</h4>
+        <p>Partnered with women BC agents — "Digital Naaris" — as the distribution and trust layer for all three products.</p>
+      </div>
+      <div class="process-arrow">→</div>
+      <div class="process-step">
+        <div class="process-num">04</div>
+        <h4>Scale</h4>
+        <p>Tracked adoption, GTV, and agent performance as guardrail metrics to double down on what worked.</p>
+      </div>
+    </div>
+
+    <div class="skills-row">
+      <span class="skill-pill">Product Strategy</span>
+      <span class="skill-pill">Field Research</span>
+      <span class="skill-pill">Gender-Responsive Design</span>
+      <span class="skill-pill">Agent Network GTM</span>
+      <span class="skill-pill">0→1 Launch</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================ DIAGNOSIS -->
+<section id="diagnosis">
+  <div class="wrap">
+
+    <div class="section-head">
+      <p class="eyebrow">Diagnosis</p>
+      <h2>Four insights from the field</h2>
+      <p>Research across focus group discussions, a 634-respondent survey, and industry data surfaced four behavior patterns — each became a direct input into product design.</p>
+    </div>
+
+    <div class="diagnosis-grid">
+      <div class="diagnosis-card">
+        <div class="diagnosis-num">01</div>
+        <h3>Savings Behavior</h3>
+        <p>Women save informally, mainly toward children's education, weddings, and emergencies — not wealth accumulation.</p>
+      </div>
+      <div class="diagnosis-card">
+        <div class="diagnosis-num">02</div>
+        <h3>Loan Behavior</h3>
+        <p>Loans of ₹25K–₹1L are common, but repayment responsibility falls on women even when husbands direct the borrowing.</p>
+      </div>
+      <div class="diagnosis-card">
+        <div class="diagnosis-num">03</div>
+        <h3>Insurance &amp; Investment Behavior</h3>
+        <p>Products like SIPs and PMSBY are known but avoided — seen as risky or illiquid, with no trusted person nearby to explain them.</p>
+      </div>
+      <div class="diagnosis-card">
+        <div class="diagnosis-num">04</div>
+        <h3>Commerce Behavior</h3>
+        <p>Women want the variety e-commerce offers but are blocked by delivery distance and low confidence navigating apps alone.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================ STAKEHOLDERS -->
+<section id="stakeholders">
+  <div class="wrap">
+
+    <div class="section-head">
+      <p class="eyebrow">Stakeholders</p>
+      <h2>Who's in the ecosystem</h2>
+      <p>Four groups shape how each product pillar gets used, sold, and trusted.</p>
+    </div>
+
+    <div class="stake-grid">
+      <div class="stake-card">
+        <div class="stake-num">01</div>
+        <h4>Woman Customer</h4>
+        <p>Saves, borrows, invests, and shops — often through a formal channel for the first time</p>
+      </div>
+      <div class="stake-card">
+        <div class="stake-num">02</div>
+        <h4>Digital Naari (Agent)</h4>
+        <p>Distributes all three pillars as the trusted local advisor</p>
+      </div>
+      <div class="stake-card">
+        <div class="stake-num">03</div>
+        <h4>BCNM / Ops</h4>
+        <p>Supports agents, monitors service quality and grievance resolution</p>
+      </div>
+      <div class="stake-card">
+        <div class="stake-num">04</div>
+        <h4>Bank / AMC Partner</h4>
+        <p>Provides the underlying FD, mutual fund, and commerce infrastructure</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================ SOLUTION 1: SHECOMMERCE -->
+<section id="solution-1">
+  <div class="wrap">
+
+    <div class="section-head">
+      <p class="eyebrow">Solution 1</p>
+      <h2>SheCommerce — assisted commerce for the last mile</h2>
+      <p>Replaced a self-serve app women couldn't confidently use with an agent-assisted ordering and returns flow.</p>
+    </div>
+
+    <div class="solution-subsection">
+      <div class="flow-label">Before</div>
+      <div class="flow-row">
+        <div class="flow-step"><div class="flow-step-tag">Customer</div></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step"><div class="flow-step-tag">Self-Serve App</div></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step"><div class="flow-step-tag">Delivery (5–7 km)</div></div>
+        <div class="flow-arrow is-break">✕</div>
+        <div class="flow-step is-broken"><div class="flow-step-tag">Low Adoption</div></div>
+      </div>
+      <p class="flow-caption">No trusted, local step between wanting to buy and completing a purchase — demand stalled before checkout.</p>
+    </div>
+
+    <div class="solution-subsection">
+      <div class="flow-label">After</div>
+      <div class="flow-row">
+        <div class="flow-step"><div class="flow-step-tag">Customer</div></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step"><div class="flow-step-tag">Agent Places Order</div></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step is-fixed"><div class="flow-step-tag">Cash Collected Locally</div></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step is-fixed"><div class="flow-step-tag">Agent Manages Returns</div></div>
+      </div>
+      <p class="flow-caption">Every order now runs through a trusted local agent, from placement through to returns and exchanges.</p>
+    </div>
+
+    <div class="outcome-banner">
+      <span class="tag">Outcome</span>
+      <p>Removed the digital-literacy and delivery-access barriers women faced, folding them into one agent-led flow.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================ SOLUTION 2: FIXED DEPOSITS -->
+<section id="solution-2">
+  <div class="wrap">
+
+    <div class="section-head">
+      <p class="eyebrow">Solution 2</p>
+      <h2>Goal-linked Fixed Deposits</h2>
+      <p>Rebuilt the deposit product around how women actually save — in small, irregular amounts, toward a named goal.</p>
+    </div>
+
+    <div class="dash-grid">
+      <div class="dash-col">
+        <h4>01 · Flexible Collection</h4>
+        <p class="dash-desc">Accepts small, irregular deposits instead of fixed monthly minimums — matching unstable, seasonal income.</p>
+        <div class="dash-stat-row">
+          <div class="dash-stat">
+            <div class="dash-stat-num">Weekly</div>
+            <div class="dash-stat-label">Deposit Cadence Supported</div>
+          </div>
+          <div class="dash-stat">
+            <div class="dash-stat-num">Goal-Linked</div>
+            <div class="dash-stat-label">Maturity Tied to a Purpose</div>
+          </div>
+          <div class="dash-stat">
+            <div class="dash-stat-num">Flexible</div>
+            <div class="dash-stat-label">Withdrawal Terms</div>
+          </div>
+        </div>
+      </div>
+      <div class="dash-col">
+        <h4>02 · Goal Visibility</h4>
+        <p class="dash-desc">Every deposit ties to a visible, named goal — education, wedding, emergency fund — not an abstract interest rate.</p>
+        <div class="flag-list">
+          <div class="flag-item">"Saving for daughter's school fees" — 6 months to goal</div>
+          <div class="flag-item">"Wedding fund" — deposited weekly via local agent</div>
+        </div>
+        <span class="bulk-btn">View Goal Progress</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================ SOLUTIONS 3 & 4: MUTUAL FUNDS + AGENT ENABLEMENT -->
+<section id="solution-3-4">
+  <div class="wrap">
+
+    <div class="section-head">
+      <p class="eyebrow">Solutions 3 &amp; 4</p>
+      <h2>A trusted entry point, built on the agent layer</h2>
+      <p>Mutual Funds needed a first-time investor's hand held — and that hand had to be the same agent she already trusted.</p>
+    </div>
+
+    <div class="exception-grid">
+      <div class="exception-col">
+        <h4>Mutual Funds — First SIP</h4>
+        <div class="exception-steps">
+          <div class="exception-step"><span class="exception-step-num">1</span><p>Agent explains a SIP in plain terms during a routine visit.</p></div>
+          <div class="exception-step"><span class="exception-step-num">2</span><p>Customer starts with a small, low-commitment ticket size.</p></div>
+          <div class="exception-step"><span class="exception-step-num">3</span><p>Agent tracks and explains fund performance without jargon.</p></div>
+          <div class="exception-step"><span class="exception-step-num">4</span><p>Customer graduates to larger, self-directed investing over time.</p></div>
+        </div>
+      </div>
+      <div class="exception-col">
+        <h4>Agent Enablement</h4>
+        <div class="exception-steps">
+          <div class="exception-step"><span class="exception-step-num">1</span><p>Digital Naari onboarded and trained across all three pillars.</p></div>
+          <div class="exception-step"><span class="exception-step-num">2</span><p>Positioned as the trusted local advisor, not just a transaction point.</p></div>
+          <div class="exception-step"><span class="exception-step-num">3</span><p>Equipped for privacy-sensitive flows — biometric auth, balance visibility.</p></div>
+          <div class="exception-step"><span class="exception-step-num">4</span><p>Backed by grievance and returns support to protect customer trust.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="exception-note">Both new pillars lean on the same agent-trust layer that already worked for cash-in/cash-out services — the agent, not the app, is the constant.</div>
+
+  </div>
+</section>
+
+<!-- ============================================================ SUMMARY -->
+<section id="summary">
+  <div class="wrap">
+
+    <div class="section-head">
+      <p class="eyebrow">Summary</p>
+      <h2>Bottleneck → Solution → Outcome</h2>
+      <p>A consolidated view of what was broken, what was built, and what changed — across all three pillars.</p>
+    </div>
+
+    <div class="summary-table">
+      <div class="summary-row head">
+        <div class="summary-cell">Bottleneck</div>
+        <div class="summary-cell">Solution Implemented</div>
+        <div class="summary-cell">Outcome</div>
+      </div>
+      <div class="summary-row">
+        <div class="summary-cell">Delivery gaps &amp; low digital confidence blocked e-commerce demand</div>
+        <div class="summary-cell">SheCommerce: agent-assisted ordering, cash collection, and local returns</div>
+        <div class="summary-cell outcome-cell">Adoption without requiring an independent app or nearby delivery access</div>
+      </div>
+      <div class="summary-row">
+        <div class="summary-cell">Formal savings too rigid for irregular income</div>
+        <div class="summary-cell">Goal-linked Fixed Deposits with flexible, small-ticket collection</div>
+        <div class="summary-cell outcome-cell">Savings shifted toward visible, trusted, purpose-linked products</div>
+      </div>
+      <div class="summary-row">
+        <div class="summary-cell">Awareness of SIPs existed, but not the trust to act on it</div>
+        <div class="summary-cell">Agent-assisted Mutual Funds onboarding, explained in plain terms</div>
+        <div class="summary-cell outcome-cell">First-time investors entering formal markets via a trusted local advisor</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================ IMPACT & RESULTS -->
+<section id="impact">
+  <div class="wrap">
+
+    <div class="section-head">
+      <p class="eyebrow">Impact &amp; Results</p>
+      <h2>Measurable gains across adoption, revenue, and equity</h2>
+    </div>
+
+    <div class="stat-row">
+      <div class="stat-card">
+        <div class="stat-num">25K+</div>
+        <div class="stat-label">Active users onboarded to the platform</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">₹2Cr+</div>
+        <div class="stat-label">Quarterly GTV across commerce &amp; financial services</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">3</div>
+        <div class="stat-label">Product pillars scaled under one platform</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">66%</div>
+        <div class="stat-label">Higher transaction value via women agents vs. male agents</div>
+      </div>
+    </div>
+
+    <p class="impact-context">
+      Delivered as Product Manager at PayNearby for the Digital Naari platform — by leading strategy and launch of SheCommerce, Fixed Deposits, and Mutual Funds as gender-responsive product pillars, distributed through a network of women Business Correspondents.
+    </p>
+
+  </div>
+</section>
+
+<!-- ============================================================ LOOKING AHEAD -->
+<section id="risks">
+  <div class="wrap">
+
+    <div class="section-head">
+      <p class="eyebrow">Looking Ahead</p>
+      <h2>Risks &amp; mitigations</h2>
+      <p>What could undermine these fixes — and how the design accounts for it.</p>
+    </div>
+
+    <div class="risk-grid">
+      <div class="risk-card">
+        <h3>Agent Capacity Bottleneck</h3>
+        <p>Scaling faster than agent training could create service-quality gaps — mitigated with phased onboarding and refresher training.</p>
+      </div>
+      <div class="risk-card">
+        <h3>Trust Builds Slower for Investment Products</h3>
+        <p>Insurance and mutual fund trust moves slower than commerce adoption — mitigated with longer awareness runways and simplified messaging.</p>
+      </div>
+      <div class="risk-card">
+        <h3>Logistics Outside Product Control</h3>
+        <p>Delivery-distance barriers can't be solved by the app alone — mitigated through parallel logistics partnerships.</p>
+      </div>
+      <div class="risk-card">
+        <h3>Documentation Still Excludes Some Women</h3>
+        <p>Aadhaar-related issues, especially for minors, continue to limit account access — mitigated by simplified-KYC advocacy.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================ CLOSING -->
+<div class="closing">
+  <div class="wrap">
+    <p class="eyebrow" style="margin-bottom:20px;">Digital Naari · Product Case Study</p>
+    <h2>Thank <em>you</em></h2>
+    <div class="closing-rule"></div>
+    <p class="closing-name">Dhruvi Chauhan</p>
+    <p class="closing-role">Product Manager, PayNearby × Digital Naari Platform</p>
+  </div>
+</div>
+
+<!-- ============================================================ FOOTER -->
+<footer>
+  <div class="wrap">
+    <span>Digital Naari · Product Case Study</span>
+    <span>Dhruvi Chauhan</span>
+  </div>
+</footer>
+
+</body>
+</html>

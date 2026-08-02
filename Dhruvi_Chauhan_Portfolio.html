@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dhruvi Chauhan — Product Manager</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..600&family=Space+Grotesk:wght@400..700&family=Public+Sans:wght@300..600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy-950:#101018;
+    --navy-900:#15151F;
+    --navy-800:rgba(255,255,255,.03);
+    --navy-700:rgba(255,255,255,.06);
+    --hairline:rgba(255,255,255,.08);
+    --hairline-strong:rgba(255,255,255,.16);
+    --gold:#7C6FF0;
+    --gold-soft:#9D93F5;
+    --steel:#45C4B0;
+    --steel-soft:#8FE0D4;
+    --ink:#EDEBF5;
+    --ink-dim:#B4B1C7;
+    --ink-faint:#8B889E;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--navy-950);
+    color:var(--ink);
+    font-family:'Public Sans',system-ui,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+  h1,h2,h3{font-family:'Space Grotesk',sans-serif;font-weight:700;margin:0;}
+  .eyebrow{
+    
+    font-size:11.5px;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--gold);
+  }
+  .wrap{max-width:1180px;margin:0 auto;padding:0 48px;}
+  section{position:relative;}
+  ::selection{background:var(--gold);color:var(--navy-950);}
+
+  /* ---------- nav ---------- */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(8,11,18,.86);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--hairline);
+  }
+  nav.wrap{display:flex;align-items:center;justify-content:space-between;padding:22px 48px;}
+  .brand{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:20px;letter-spacing:-.01em;}
+  .brand span{color:var(--gold);}
+  .navlinks{display:flex;gap:6px;font-size:12px;letter-spacing:.03em;}
+  .navlinks a{
+    text-decoration:none;color:var(--ink-dim);padding:9px 15px;border-radius:999px;
+    transition:color .2s,background .2s;
+  }
+  .navlinks a:hover{color:var(--gold-soft);background:rgba(201,162,75,.08);}
+
+  /* ---------- hero ---------- */
+  #home{padding:72px 0 56px;overflow:hidden;}
+  #home .grain{
+    position:absolute;top:-220px;right:-160px;width:560px;height:560px;border-radius:50%;
+    background:radial-gradient(circle,rgba(124,153,176,.14),transparent 70%);
+    pointer-events:none;
+  }
+  .hero-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:60px;align-items:center;position:relative;}
+  .hero-badge{
+    display:inline-flex;align-items:center;gap:9px;
+    font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--steel-soft);
+    border:1px solid var(--hairline-strong);padding:8px 14px;border-radius:999px;margin-bottom:26px;
+  }
+  .hero-badge .dot{width:6px;height:6px;border-radius:50%;background:var(--gold);display:inline-block;}
+  h1.name{font-size:52px;font-weight:600;line-height:1.08;letter-spacing:-.01em;}
+  h1.name em{font-style:italic;color:var(--gold);font-weight:500;}
+  .tagline{
+    font-family:'Lora',serif;font-style:italic;font-size:20px;line-height:1.6;color:var(--steel-soft);
+    max-width:46ch;margin:22px 0 0;
+  }
+  .sub{font-size:16px;line-height:1.75;color:var(--ink-dim);max-width:48ch;margin:20px 0 0;}
+  .cta-row{display:flex;gap:14px;margin-top:26px;flex-wrap:wrap;}
+  .btn{
+    text-decoration:none;font-size:12.5px;letter-spacing:.05em;
+    text-transform:uppercase;padding:15px 26px;border-radius:8px;font-weight:500;transition:all .25s;
+    display:inline-flex;align-items:center;gap:8px;
+  }
+  .btn-solid{background:var(--gold);color:var(--navy-950);}
+  .btn-solid:hover{background:var(--gold-soft);box-shadow:0 14px 32px rgba(201,162,75,.28);}
+  .btn-ghost{border:1px solid var(--hairline-strong);color:var(--ink);}
+  .btn-ghost:hover{border-color:var(--steel);color:var(--steel-soft);}
+
+  .portrait{
+    position:relative;width:100%;aspect-ratio:.92;border-radius:18px;
+    background:linear-gradient(150deg,rgba(201,162,75,.16),rgba(124,153,176,.14));
+    border:1px solid var(--hairline-strong);overflow:hidden;
+    display:flex;align-items:flex-end;justify-content:center;
+  }
+  .portrait .frame{
+    width:88%;height:88%;border-radius:12px;border:1px dashed var(--hairline-strong);
+    display:flex;align-items:center;justify-content:center;color:var(--ink-faint);
+    font-size:12px;text-align:center;padding:20px;
+  }
+  .portrait .tag{
+    position:absolute;bottom:18px;left:50%;transform:translateX(-50%);
+    background:rgba(8,11,18,.85);border:1px solid var(--hairline-strong);border-radius:999px;
+    padding:8px 18px;font-size:11.5px;color:var(--gold-soft);white-space:nowrap;
+  }
+
+  /* ---------- section shell ---------- */
+  .section{padding:60px 0;border-top:1px solid var(--hairline);}
+  .section.tinted{background:var(--navy-900);}
+  .section-head{margin-bottom:32px;max-width:70ch;}
+  .section-head h2{font-size:34px;font-weight:600;letter-spacing:-.01em;margin-top:12px;}
+  .section-head h2 em{color:var(--gold);font-style:italic;font-weight:500;}
+
+  /* ---------- about ---------- */
+  .about-lede{
+    font-family:'Space Grotesk',sans-serif;font-weight:500;font-size:22px;line-height:1.7;color:var(--ink);max-width:66ch;
+  }
+  .about-lede::first-letter{
+    font-size:58px;line-height:.8;float:left;padding:6px 10px 0 0;color:var(--gold);font-weight:600;
+  }
+  .about-body{display:grid;grid-template-columns:1fr 1fr;gap:52px;margin-top:36px;}
+  .about-body p{font-size:15.5px;line-height:1.85;color:var(--ink-dim);margin:0 0 18px;}
+  .pull{
+    border-left:2px solid var(--gold);padding:4px 0 4px 24px;margin:36px 0;
+    font-family:'Lora',serif;font-style:italic;font-size:19px;line-height:1.6;color:var(--steel-soft);
+  }
+  .why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:44px;}
+  .why-card{
+    background:var(--navy-800);border:1px solid var(--hairline);border-radius:14px;padding:28px 24px;
+    transition:border-color .3s,transform .3s;
+  }
+  .why-card:hover{border-color:var(--gold);transform:translateY(-3px);}
+  .why-card .num{font-size:12px;color:var(--gold);letter-spacing:.08em;margin-bottom:14px;display:block;}
+  .why-card h3{font-size:17px;font-weight:600;margin-bottom:10px;}
+  .why-card p{font-size:13.8px;line-height:1.7;color:var(--ink-dim);margin:0;}
+
+  .about-oneliner{font-size:18px;line-height:1.7;color:var(--ink-dim);max-width:76ch;margin:0 0 30px;}
+  .about-grid2{display:grid;grid-template-columns:1.15fr 1fr;gap:22px;}
+  .panel{
+    background:var(--navy-800);border:1px solid var(--hairline);border-radius:14px;padding:30px 32px;
+    transition:border-color .3s;
+  }
+  .panel:hover{border-color:var(--gold);}
+  .panel-label{
+    display:flex;align-items:center;gap:8px;font-size:12px;font-weight:700;
+    letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:18px;
+  }
+  .panel-label .icon{width:15px;height:15px;}
+  .why-text p{font-size:15px;line-height:1.8;color:var(--ink-dim);margin:0 0 16px;}
+  .why-text p:last-child{margin-bottom:0;}
+  .radar-panel{display:flex;flex-direction:column;align-items:center;}
+  .radar-panel svg{width:100%;height:auto;max-width:380px;}
+  .about-badges{display:flex;flex-wrap:wrap;gap:9px;margin-top:16px;justify-content:center;}
+  .about-badge{
+    background:rgba(124,111,240,.12);color:var(--gold-soft);font-size:11.5px;font-weight:600;
+    padding:7px 14px;border-radius:999px;border:1px solid rgba(124,111,240,.28);
+  }
+
+  /* ---------- johari ---------- */
+  .johari-intro{font-size:13.5px;color:var(--ink-faint);margin:0 0 22px;}
+  .johari-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+  .johari-cell{
+    background:var(--navy-800);border:1px solid var(--hairline);border-radius:14px;padding:24px 26px;
+    transition:border-color .3s;
+  }
+  .johari-cell:hover{border-color:var(--gold);}
+  .johari-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px;}
+  .johari-tag{font-size:12px;font-weight:700;letter-spacing:.03em;color:var(--gold-soft);}
+  .johari-count{
+    font-size:10.5px;font-weight:700;color:var(--ink-faint);background:rgba(255,255,255,.06);
+    padding:3px 10px;border-radius:999px;white-space:nowrap;
+  }
+  .johari-pills{display:flex;flex-wrap:wrap;gap:8px;}
+  .jpill{font-size:12px;padding:6px 13px;border-radius:999px;font-weight:500;}
+  .jpill-open{background:rgba(69,196,176,.12);color:#7FDCC9;border:1px solid rgba(69,196,176,.3);}
+  .jpill-blind{background:rgba(240,149,154,.12);color:#F0959A;border:1px solid rgba(240,149,154,.3);}
+  .jpill-hidden{background:rgba(240,200,119,.12);color:#F0C877;border:1px solid rgba(240,200,119,.3);}
+  .johari-muted{font-size:13px;color:var(--ink-faint);line-height:1.7;margin:0;}
+  .about-quote{
+    border-left:2px solid var(--gold);padding:4px 0 4px 24px;margin:32px 0 0;
+    font-family:'Lora',serif;font-style:italic;font-size:19px;line-height:1.6;color:var(--steel-soft);
+  }
+
+  /* ---------- experience ---------- */
+  .timeline{display:flex;flex-direction:column;gap:0;}
+  .job{
+    display:grid;grid-template-columns:200px 1fr;gap:36px;padding:34px 0;border-top:1px solid var(--hairline);
+  }
+  .job:first-child{border-top:none;}
+  .job-meta .role{font-size:17px;font-weight:700;font-family:'Space Grotesk',sans-serif;}
+  .job-meta .org{font-size:13.5px;color:var(--steel-soft);margin-top:4px;}
+  .job-meta .dates{font-size:11.5px;color:var(--ink-faint);margin-top:10px;letter-spacing:.03em;}
+  .job-body ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:12px;}
+  .job-body li{font-size:14.5px;line-height:1.7;color:var(--ink-dim);padding-left:18px;position:relative;}
+  .job-body li::before{content:"—";position:absolute;left:0;color:var(--gold);}
+  .job-body li b{color:var(--ink);font-weight:600;}
+
+  /* ---------- projects ---------- */
+  .proj-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;}
+  .proj-tag{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--steel-soft);}
+  .proj-card h3{font-size:19px;font-weight:600;margin:12px 0 12px;}
+  .proj-card p{font-size:14px;line-height:1.75;color:var(--ink-dim);margin:0 0 18px;}
+  .metric-row{display:flex;flex-wrap:wrap;gap:10px;}
+  .metric{
+    font-size:11.5px;color:var(--gold-soft);
+    border:1px solid var(--hairline-strong);border-radius:999px;padding:6px 12px;
+  }
+
+  /* ---------- skills ---------- */
+  .skills-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:34px 48px;}
+  .skill-cat h3{font-size:14px;color:var(--gold);text-transform:uppercase;letter-spacing:.06em;margin-bottom:16px;}
+  .skill-tags{display:flex;flex-wrap:wrap;gap:8px;}
+  .skill-tags span{
+    font-size:12.5px;padding:8px 13px;border-radius:8px;background:rgba(124,153,176,.08);
+    color:var(--steel-soft);border:1px solid var(--hairline);
+  }
+
+  /* ---------- certs ---------- */
+  .cert-strip{display:flex;flex-wrap:wrap;gap:12px;}
+  .cert-chip{
+    display:flex;align-items:center;gap:8px;font-size:13px;color:var(--ink-dim);
+    border:1px solid var(--hairline-strong);border-radius:10px;padding:12px 16px;
+  }
+  .cert-chip b{color:var(--ink);font-weight:600;}
+
+  /* ---------- contact ---------- */
+  #contact{text-align:center;padding-bottom:110px;}
+  #contact h2{font-size:38px;}
+  #contact p{color:var(--ink-dim);font-size:15.5px;margin:18px auto 34px;max-width:50ch;}
+  .contact-links{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;}
+
+  footer{border-top:1px solid var(--hairline);padding:28px 0;text-align:center;font-size:12.5px;color:var(--ink-faint);}
+
+  @media(max-width:860px){
+    .wrap{padding:0 22px;}
+    nav.wrap{padding:18px 22px;}
+    .navlinks{display:none;}
+    .hero-grid{grid-template-columns:1fr;}
+    .portrait{max-width:280px;margin:0 auto;}
+    h1.name{font-size:38px;}
+    .about-body,.why-grid,.proj-grid,.skills-grid,.about-grid2,.johari-grid{grid-template-columns:1fr;}
+    .job{grid-template-columns:1fr;gap:12px;}
+    .section{padding:44px 0;}
+  }
+/* ---------- icons ---------- */
+.icon{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;}
+.icon-sm{width:15px;height:15px;}
+.icon-fill{fill:currentColor;stroke:none;}
+
+/* ---------- project cards v2 ---------- */
+.proj-card{
+  background:var(--navy-800);border:1px solid var(--hairline);border-radius:16px;overflow:hidden;
+  transition:border-color .3s,transform .3s;text-decoration:none;color:inherit;
+  display:flex;flex-direction:column;
+}
+.proj-card:hover{border-color:var(--steel);transform:translateY(-4px);}
+.proj-card[data-project]{cursor:pointer;}
+.proj-thumb{
+  height:172px;position:relative;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,rgba(124,111,240,.30),rgba(69,196,176,.20));
+  overflow:hidden;
+}
+.proj-thumb::before{
+  content:"";position:absolute;inset:0;
+  background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.03) 0 16px,rgba(255,255,255,0) 16px 32px);
+}
+.proj-thumb::after{
+  content:"";position:absolute;width:220px;height:220px;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,255,255,.08),transparent 70%);
+  top:-90px;right:-70px;
+}
+.proj-icon-badge{
+  position:relative;z-index:1;width:58px;height:58px;border-radius:50%;
+  background:rgba(16,16,24,.55);border:1px solid rgba(255,255,255,.2);
+  display:flex;align-items:center;justify-content:center;
+}
+.proj-icon-badge .icon{width:27px;height:27px;color:var(--ink);}
+.proj-body{padding:24px 26px 26px;display:flex;flex-direction:column;flex:1;}
+.proj-more{
+  margin-top:auto;padding-top:16px;border-top:1px solid var(--hairline);
+  display:flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600;color:var(--gold-soft);
+}
+.proj-more .icon{width:14px;height:14px;transition:transform .25s;}
+.proj-card:hover .proj-more .icon{transform:translateX(4px);}
+
+/* ---------- misc icon placements ---------- */
+.hero-badge .icon{width:14px;height:14px;color:var(--steel-soft);}
+.why-card .icon-wrap{
+  width:38px;height:38px;border-radius:10px;background:rgba(124,111,240,.12);
+  display:flex;align-items:center;justify-content:center;margin-bottom:16px;
+}
+.why-card .icon-wrap .icon{width:19px;height:19px;color:var(--gold-soft);}
+.skill-cat h3{display:flex;align-items:center;gap:8px;}
+.job-meta .role-row{display:flex;align-items:center;gap:8px;}
+.job-meta .role-row .icon{width:16px;height:16px;color:var(--gold-soft);}
+.btn .icon{width:15px;height:15px;}
+
+/* ---------- detail page ---------- */
+.back-link{
+  display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--ink-dim);
+  text-decoration:none;margin-bottom:20px;transition:color .2s;
+}
+.back-link:hover{color:var(--gold-soft);}
+.back-link .icon{width:15px;height:15px;}
+.detail-hero{
+  height:280px;border-radius:18px;position:relative;overflow:hidden;
+  background:linear-gradient(135deg,rgba(124,111,240,.32),rgba(69,196,176,.22));
+  display:flex;align-items:center;justify-content:center;margin-bottom:32px;
+}
+.detail-hero::before{
+  content:"";position:absolute;inset:0;
+  background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.03) 0 20px,rgba(255,255,255,0) 20px 40px);
+}
+.detail-hero .proj-icon-badge{width:92px;height:92px;}
+.detail-hero .proj-icon-badge .icon{width:42px;height:42px;}
+.detail-meta{display:flex;flex-wrap:wrap;gap:32px;margin-bottom:32px;padding-bottom:26px;border-bottom:1px solid var(--hairline);}
+.detail-meta div{font-size:13px;}
+.detail-meta .label{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-faint);margin-bottom:6px;}
+.detail-meta .value{font-size:14.5px;color:var(--ink);font-weight:600;}
+.detail-grid{display:grid;grid-template-columns:1.6fr 1fr;gap:56px;}
+.detail-body h3{font-size:20px;margin:36px 0 14px;}
+.detail-body h3:first-child{margin-top:0;}
+.detail-body p{font-size:15px;line-height:1.85;color:var(--ink-dim);margin:0 0 16px;}
+.detail-body ul{margin:0 0 16px;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px;}
+.detail-body li{font-size:14.5px;line-height:1.7;color:var(--ink-dim);padding-left:18px;position:relative;}
+.detail-body li::before{content:"—";position:absolute;left:0;color:var(--gold);}
+.detail-side{background:var(--navy-800);border:1px solid var(--hairline);border-radius:14px;padding:26px;height:fit-content;}
+.detail-side h4{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--gold);margin:0 0 18px;}
+.detail-metric{display:flex;justify-content:space-between;align-items:baseline;padding:12px 0;border-top:1px solid var(--hairline);}
+.detail-metric:first-of-type{border-top:none;}
+.detail-metric .n{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:19px;color:var(--steel-soft);}
+.detail-metric .l{font-size:12px;color:var(--ink-faint);text-align:right;max-width:14ch;}
+.detail-nav{display:flex;justify-content:space-between;margin-top:44px;padding-top:24px;border-top:1px solid var(--hairline);}
+.detail-nav a{text-decoration:none;color:var(--ink-dim);font-size:13px;display:flex;align-items:center;gap:8px;transition:color .2s;}
+.detail-nav a:hover{color:var(--gold-soft);}
+.detail-nav .icon{width:15px;height:15px;}
+
+@media(max-width:860px){
+  .detail-grid{grid-template-columns:1fr;}
+  .detail-hero{height:200px;}
+}
+
+/* ---------- project infographics ---------- */
+.ring-chart{position:relative;z-index:1;width:76px;height:76px;}
+.proj-stat{
+  position:absolute;left:14px;bottom:14px;z-index:2;
+  background:rgba(16,16,24,.6);border:1px solid rgba(255,255,255,.18);border-radius:10px;
+  padding:7px 12px;
+}
+.proj-stat .n{display:block;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:16px;color:var(--ink);line-height:1;}
+.proj-stat .l{display:block;font-size:9.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-faint);margin-top:3px;}
+
+/* ---------- hero stat band ---------- */
+.stat-band{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--hairline);
+  border-top:1px solid var(--hairline);border-bottom:1px solid var(--hairline);
+}
+.stat-band .stat{background:var(--navy-950);padding:26px 30px;display:flex;align-items:center;gap:14px;}
+.stat-band .stat .icon{width:22px;height:22px;color:var(--gold);flex-shrink:0;}
+.stat-band .stat .n{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:24px;line-height:1;}
+.stat-band .stat .l{font-size:11.5px;color:var(--ink-faint);margin-top:4px;}
+@media(max-width:860px){
+  .stat-band{grid-template-columns:repeat(2,1fr);}
+  .stat-band .stat{padding:20px;}
+}
+
+</style>
+</head>
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+<symbol id="i-mail" viewBox="0 0 24 24"><path d="M3 6h18v12H3z"/><path d="M3 7l9 6 9-6"/></symbol>
+<symbol id="i-link" viewBox="0 0 24 24"><path d="M9 15l6-6"/><path d="M13 6l1.5-1.5a3.5 3.5 0 0 1 5 5L18 11"/><path d="M11 18l-1.5 1.5a3.5 3.5 0 0 1-5-5L6 13"/></symbol>
+<symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M4 12h16"/><path d="M13 5l7 7-7 7"/></symbol>
+<symbol id="i-arrow-left" viewBox="0 0 24 24"><path d="M20 12H4"/><path d="M11 19l-7-7 7-7"/></symbol>
+<symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M4 21h16"/></symbol>
+<symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></symbol>
+<symbol id="i-layers" viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 13l9 5 9-5"/></symbol>
+<symbol id="i-bulb" viewBox="0 0 24 24"><path d="M9 18h6"/><path d="M10 21h4"/><path d="M12 3a6 6 0 0 0-4 10.5c.6.5 1 1.3 1 2.1V16h6v-.4c0-.8.4-1.6 1-2.1A6 6 0 0 0 12 3z"/></symbol>
+<symbol id="i-briefcase" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M3 12h18"/></symbol>
+<symbol id="i-badge" viewBox="0 0 24 24"><circle cx="12" cy="9" r="6"/><path d="M9 14.6L7 22l5-3.2 5 3.2-2-7.4"/></symbol>
+<symbol id="i-growth" viewBox="0 0 24 24"><path d="M4 20V13"/><path d="M10 20V8"/><path d="M16 20V4"/><path d="M4 20h16"/></symbol>
+<symbol id="i-cart" viewBox="0 0 24 24"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M3 4h2l2.4 12h10.2l2-8H6.2"/></symbol>
+<symbol id="i-network" viewBox="0 0 24 24"><circle cx="6" cy="6" r="2.3"/><circle cx="18" cy="6" r="2.3"/><circle cx="12" cy="18" r="2.3"/><path d="M7.9 7.5L11 16"/><path d="M16.1 7.5L13 16"/><path d="M8.3 6h7.4"/></symbol>
+<symbol id="i-leaf" viewBox="0 0 24 24"><path d="M5 13c0-6.5 5-10.5 15-9.5-.5 9.5-5.5 13.5-15 13.5-1 0-1.7-.1-1.7-.1"/><path d="M5 13c2-2.2 5.4-3.4 9.6-3.9"/></symbol>
+<symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 5h16v10H8l-4 4z"/><circle cx="9" cy="10" r=".7" class="icon-fill"/><circle cx="12" cy="10" r=".7" class="icon-fill"/><circle cx="15" cy="10" r=".7" class="icon-fill"/></symbol>
+<symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="2.4"/><path d="M15.5 14.2c2.6.4 4.5 2.6 4.5 5.3"/></symbol>
+<symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3v4"/><path d="M12 17v4"/><path d="M3 12h4"/><path d="M17 12h4"/><path d="M5.6 5.6l2.8 2.8"/><path d="M15.6 15.6l2.8 2.8"/><path d="M18.4 5.6l-2.8 2.8"/><path d="M8.4 15.6l-2.8 2.8"/></symbol>
+</svg>
+
+<header>
+  <nav class="wrap">
+    <div class="brand">Dhruvi Chauhan<span>.</span></div>
+    <div class="navlinks">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#experience">Journey</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="uploads/resume.pdf" target="_blank" rel="noopener">Resume</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+</header>
+
+<section id="home">
+  <div class="grain"></div>
+  <div class="wrap hero-grid">
+    <div>
+      <div class="hero-badge"><svg class="icon"><use href="#i-spark"/></svg>Senior Product Manager · 6+ years · IIM Kozhikode PGP-BL ’27</div>
+      <h1 class="name">Hi, I'm Dhruvi <em>Chauhan.</em></h1>
+      <p class="tagline">Turning complex problems into products that drive customer and business impact.
+</p>
+      <p class="sub">I enjoy the messy part of product work—the ambiguity before a clear roadmap exists. Over the past six years, I've turned complex business problems into customer-centric products across FinTech and eCommerce, taking ideas from 0→1 and scaling what works. Now, at IIM Kozhikode, I'm strengthening the strategic and leadership perspective needed to build products that create lasting customer and business impact.
+</p>
+      <div class="cta-row">
+        <a href="#projects" class="btn btn-solid">View projects <svg class="icon"><use href="#i-arrow-right"/></svg></a>
+        <a href="#contact" class="btn btn-ghost">Get in touch</a>
+      </div>
+    </div>
+    <div class="portrait">
+      <img src="assets/Dhruvi Photo.jpg" alt="Dhruvi Chauhan" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+    </div>
+  </div>
+</section>
+
+<div class="stat-band">
+  <div class="stat"><svg class="icon"><use href="#i-users"/></svg><div><div class="n">100K+</div><div class="l">Retailers enabled</div></div></div>
+  <div class="stat"><svg class="icon"><use href="#i-network"/></svg><div><div class="n">1M+</div><div class="l">Customers served</div></div></div>
+  <div class="stat"><svg class="icon"><use href="#i-growth"/></svg><div><div class="n">₹100Cr+</div><div class="l">Business impact</div></div></div>
+  <div class="stat"><svg class="icon"><use href="#i-briefcase"/></svg><div><div class="n">6+</div><div class="l">Years in product</div></div></div>
+</div>
+
+<section id="about" class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">About</span>
+      <h2>Curious about <em>why</em>, before <em>how</em>.</h2>
+    </div>
+
+    <div class="about-grid2">
+      <div class="panel">
+        <h3 class="panel-label"><svg class="icon"><use href="#i-search"/></svg>Why Product Management</h3>
+        <div class="why-text">
+          <p>It's the one career where my curiosity feels completely at home. I'd rather understand <em style="color:var(--ink);font-style:italic;">why</em> something works than just that it does — talking to customers, questioning assumptions, connecting perspectives before touching a solution. It sits at the intersection of business, technology and human behaviour, and my favourite wins are quiet ones: a simpler journey, one less friction point, value created on both sides.</p>
+          <p>For me, this was never a career choice — it's how I already think. Six years building and scaling FinTech, AI, eCommerce, CRM and MarTech products, and now, at IIM Kozhikode, sharpening the strategic and leadership perspective needed to build products that create lasting impact.</p>
+        </div>
+      </div>
+
+      <div class="panel radar-panel">
+        <h3 class="panel-label" style="align-self:flex-start;"><svg class="icon"><use href="#i-users"/></svg>Personality Traits</h3>
+        <svg viewBox="-100 -10 460 230">
+          <polygon points="120,15 205,72 172,175 68,175 35,72" fill="none" stroke="rgba(255,255,255,.12)" stroke-width="1"/>
+          <polygon points="120,42 182,84 155,158 85,158 58,84" fill="none" stroke="rgba(255,255,255,.12)" stroke-width="1"/>
+          <polygon points="120,68 160,95 138,140 102,140 80,95" fill="none" stroke="rgba(255,255,255,.12)" stroke-width="1"/>
+          <polygon points="120,28 195,76 148,166 82,160 53,80" fill="#7C6FF0" fill-opacity="0.35" stroke="#7C6FF0" stroke-width="2.5"/>
+          <text x="120" y="10" fill="#B4B1C7" font-size="12" text-anchor="middle">Openness 3.7<title>Openness (O): Measures your curiosity, creativity, and love for new ideas.</title></text>
+          <text x="210" y="68" fill="#B4B1C7" font-size="12" text-anchor="start">Conscientiousness 4.1<title>Conscientiousness (C): Measures your organization, hard work, and dependability.</title></text>
+          <text x="175" y="196" fill="#B4B1C7" font-size="12" text-anchor="middle">Extraversion 4.25<title>Extraversion (E): Measures how talkative, outgoing, and energetic you are in social settings.</title></text>
+          <text x="65" y="196" fill="#B4B1C7" font-size="12" text-anchor="middle">Agreeableness 4.33<title>Agreeableness (A): Measures your kindness, empathy, and cooperation with others.</title></text>
+          <text x="30" y="68" fill="#B4B1C7" font-size="12" text-anchor="end">Neuroticism 3.0<title>Neuroticism (N): Measures your tendency to experience stress, mood shifts, and anxiety.</title></text>
+        </svg>
+        <div class="about-badges">
+          <div class="about-badge">Resource Investigator · Belbin</div>
+          <div class="about-badge">Collaborative Negotiator · TKI</div>
+          <div class="about-badge">High EI · 176/210 · TEIQue</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:36px;">
+      <h3 class="panel-label"><svg class="icon"><use href="#i-network"/></svg>Johari Window</h3>
+      <p class="johari-intro">How I see myself, versus how others see me — mapped across 55 traits.</p>
+
+      <div class="johari-grid">
+        <div class="johari-cell">
+          <div class="johari-head"><span class="johari-tag">OPEN — known to self &amp; others</span><span class="johari-count">11 traits</span></div>
+          <div class="johari-pills">
+            <span class="jpill jpill-open">Adaptable</span>
+            <span class="jpill jpill-open">Bold</span>
+            <span class="jpill jpill-open">Cheerful</span>
+            <span class="jpill jpill-open">Energetic</span>
+            <span class="jpill jpill-open">Extroverted</span>
+            <span class="jpill jpill-open">Friendly</span>
+            <span class="jpill jpill-open">Kind</span>
+            <span class="jpill jpill-open">Logical</span>
+            <span class="jpill jpill-open">Mature</span>
+            <span class="jpill jpill-open">Sensible</span>
+            <span class="jpill jpill-open">Warm</span>
+          </div>
+        </div>
+        <div class="johari-cell">
+          <div class="johari-head"><span class="johari-tag">BLIND SPOT — known to others, not self</span><span class="johari-count">13 traits</span></div>
+          <div class="johari-pills">
+            <span class="jpill jpill-blind">Intelligent</span>
+            <span class="jpill jpill-blind">Dependable</span>
+            <span class="jpill jpill-blind">Organised</span>
+            <span class="jpill jpill-blind">Trustworthy</span>
+            <span class="jpill jpill-blind">Observant</span>
+            <span class="jpill jpill-blind">Confident</span>
+            <span class="jpill jpill-blind">Helpful</span>
+            <span class="jpill jpill-blind">Independent</span>
+            <span class="jpill jpill-blind">Knowledgeable</span>
+            <span class="jpill jpill-blind">Ingenious</span>
+            <span class="jpill jpill-blind">Responsive</span>
+            <span class="jpill jpill-blind">Reflective</span>
+            <span class="jpill jpill-blind">Sympathetic</span>
+          </div>
+        </div>
+        <div class="johari-cell">
+          <div class="johari-head"><span class="johari-tag">HIDDEN — known to self, not others</span><span class="johari-count">4 traits</span></div>
+          <div class="johari-pills">
+            <span class="jpill jpill-hidden">Calm</span>
+            <span class="jpill jpill-hidden">Accepting</span>
+            <span class="jpill jpill-hidden">Able</span>
+            <span class="jpill jpill-hidden">Loving</span>
+          </div>
+        </div>
+        <div class="johari-cell">
+          <div class="johari-head"><span class="johari-tag">UNKNOWN — growth space</span><span class="johari-count">27 traits</span></div>
+          <p class="johari-muted">Neither I nor others have surfaced these yet — clever, patient, wise, and more still to explore.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="about-quote">"Some of the most important product decisions happen long before a single feature is built."</div>
+  </div>
+</section>
+
+<section id="experience" class="section tinted">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Journey</span>
+      <h2>From Engineering to <em>Product Leadership.</em></h2>
+    </div>
+    <div style="position:relative;padding-left:36px;">
+      <div style="position:absolute;left:7px;top:6px;bottom:6px;width:2px;background:linear-gradient(180deg,#7C6FF0,rgba(124,111,240,.1));"></div>
+
+      <div style="position:relative;margin-bottom:22px;">
+        <div style="position:absolute;left:-32px;top:5px;width:11px;height:11px;border-radius:3px;background:#101018;border:2px solid #7C6FF0;"></div>
+        <div style="display:flex;gap:18px;align-items:center;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:18px 24px;transition:border-color .3s;">
+          <div style="flex:none;width:56px;height:56px;border-radius:12px;background:#fff;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:6px;"><img src="assets/Logos/Somaiya-logo.png" alt="K. J. Somaiya College of Engineering logo" style="width:100%;height:100%;object-fit:contain;"></div>
+          <div>
+            <div style="display:flex;gap:10px;align-items:center;margin-bottom:6px;">
+              <span style="font-size:12px;color:#8B889E;font-weight:600;">2015–2019</span>
+              <span style="font-size:10.5px;letter-spacing:.08em;background:rgba(69,196,176,.12);color:#7FDCC9;padding:5px 12px;border-radius:999px;">EDUCATION</span>
+            </div>
+            <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:17px;">B.Tech (ENTC), K. J. Somaiya College of Engineering</div>
+            <div style="font-size:13px;color:#B4B1C7;margin-top:4px;line-height:1.5;">Cultural Secretary &amp; Alumni Cell Head — 20+ sponsorships, 5,000+ alumni engaged.</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="position:relative;margin-bottom:22px;">
+        <div style="position:absolute;left:-32px;top:5px;width:11px;height:11px;border-radius:3px;background:#101018;border:2px solid #7C6FF0;"></div>
+        <div style="display:flex;gap:18px;align-items:center;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:18px 24px;transition:border-color .3s;">
+          <div style="flex:none;width:56px;height:56px;border-radius:12px;background:#fff;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:6px;"><img src="assets/Logos/neebal_technologies_logo.jpg" alt="Neebal Technologies logo" style="width:100%;height:100%;object-fit:contain;"></div>
+          <div>
+            <div style="display:flex;gap:10px;align-items:center;margin-bottom:6px;">
+              <span style="font-size:12px;color:#8B889E;font-weight:600;">Dec'19 – Jul'21</span>
+              <span style="font-size:10.5px;letter-spacing:.08em;background:rgba(69,196,176,.12);color:#7FDCC9;padding:5px 12px;border-radius:999px;">BUSINESS ANALYST</span>
+            </div>
+            <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:17px;">Neebal Technologies</div>
+            <div style="font-size:13px;color:#B4B1C7;margin-top:4px;line-height:1.5;">Launched Subsidex, agri-fintech SaaS platform — INR 1 Cr+ ARR.</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="position:relative;margin-bottom:22px;">
+        <div style="position:absolute;left:-32px;top:5px;width:11px;height:11px;border-radius:3px;background:#101018;border:2px solid #7C6FF0;"></div>
+        <div style="display:flex;gap:18px;align-items:center;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:18px 24px;transition:border-color .3s;">
+          <div style="flex:none;width:56px;height:56px;border-radius:12px;background:#fff;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:6px;"><img src="assets/Logos/fynd-logo.png" alt="Fynd logo" style="width:100%;height:100%;object-fit:contain;"></div>
+          <div>
+            <div style="display:flex;gap:10px;align-items:center;margin-bottom:6px;">
+              <span style="font-size:12px;color:#8B889E;font-weight:600;">Jul'21 – Nov'21</span>
+              <span style="font-size:10.5px;letter-spacing:.08em;background:rgba(69,196,176,.12);color:#7FDCC9;padding:5px 12px;border-radius:999px;">PROGRAM MANAGER</span>
+            </div>
+            <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:17px;">Fynd (Shopsense Retail Technologies)</div>
+            <div style="font-size:13px;color:#B4B1C7;margin-top:4px;line-height:1.5;">Led the Refund Engine build — 48% faster turnaround across JioMart.</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="position:relative;margin-bottom:22px;">
+        <div style="position:absolute;left:-32px;top:5px;width:11px;height:11px;border-radius:3px;background:#101018;border:2px solid #7C6FF0;"></div>
+        <div style="display:flex;gap:18px;align-items:center;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:18px 24px;transition:border-color .3s;">
+          <div style="flex:none;width:56px;height:56px;border-radius:12px;background:#fff;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:6px;"><img src="assets/Logos/paynearby-logo.png" alt="PayNearby logo" style="width:100%;height:100%;object-fit:contain;"></div>
+          <div>
+            <div style="display:flex;gap:10px;align-items:center;margin-bottom:6px;">
+              <span style="font-size:12px;color:#8B889E;font-weight:600;">Nov'21 – Mar'26</span>
+              <span style="font-size:10.5px;letter-spacing:.08em;background:rgba(69,196,176,.12);color:#7FDCC9;padding:5px 12px;border-radius:999px;">SENIOR PRODUCT MANAGER</span>
+            </div>
+            <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:17px;">PayNearby (Nearby Technologies)</div>
+            <div style="font-size:13px;color:#B4B1C7;margin-top:4px;line-height:1.5;">Scaled eCommerce, ONDC, Loyalty and AI to 100K+ retailers, 1M+ customers.</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="position:relative;margin-bottom:22px;">
+        <div style="position:absolute;left:-32px;top:5px;width:11px;height:11px;border-radius:3px;background:#101018;border:2px solid #7C6FF0;"></div>
+        <div style="display:flex;gap:18px;align-items:center;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:18px 24px;transition:border-color .3s;">
+          <div style="flex:none;width:56px;height:56px;border-radius:12px;background:#fff;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:6px;"><img src="assets/Logos/iim kozhikode-logo.png" alt="IIM Kozhikode logo" style="width:100%;height:100%;object-fit:contain;"></div>
+          <div>
+            <div style="display:flex;gap:10px;align-items:center;margin-bottom:6px;">
+              <span style="font-size:12px;color:#8B889E;font-weight:600;">2026–2027</span>
+              <span style="font-size:10.5px;letter-spacing:.08em;background:rgba(69,196,176,.12);color:#7FDCC9;padding:5px 12px;border-radius:999px;">MBA</span>
+            </div>
+            <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:17px;">IIM Kozhikode — PGP-Business Leadership</div>
+            <div style="font-size:13px;color:#B4B1C7;margin-top:4px;line-height:1.5;">Strengthening strategic leadership and enterprise decision-making.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="projects" class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Selected work</span>
+      <h2>Products that moved <em>real</em> numbers.</h2>
+    </div>
+    <div class="proj-grid">
+      <div class="proj-card" data-project="saathi-ai">
+        <div class="proj-thumb"><img src="assets/Project Images/Saathi AI.png" alt="Saathi AI Financial Assistant screenshot" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;"><div class="proj-stat"><span class="n">5K+</span><span class="l">Monthly users</span></div></div>
+        <div class="proj-body">
+          <span class="proj-tag">FinTech · Conversational AI</span>
+          <h3>Saathi — AI Financial Assistant</h3>
+          <p>A voice-led, multilingual LLM assistant — with a custom eval framework built to catch hallucinations before users do.</p>
+          <div class="metric-row">
+            <span class="metric">38% self-service resolution</span>
+            <span class="metric">5K+ MAUs</span>
+            <span class="metric">75% auto-closure</span>
+          </div>
+        </div>
+      </div>
+      <div class="proj-card" data-project="saathi-rewards">
+        <div class="proj-thumb"><img src="assets/Project Images/Rewards.png" alt="Saathi Rewards &amp; Engagement Engine screenshot" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;"><div class="proj-stat"><span class="n">20K+</span><span class="l">Users engaged</span></div></div>
+        <div class="proj-body">
+          <span class="proj-tag">Loyalty · AI · Banking Correspondents</span>
+          <h3>Rewards &amp; Engagement Engine — Saathi App</h3>
+          <p>A two-sided loyalty engine for PayNearby's Banking Correspondents — rewards that build habits, a dashboard that builds pride.</p>
+          <div class="metric-row">
+            <span class="metric">30% acquisition growth</span>
+            <span class="metric">60% retention uplift</span>
+            <span class="metric">64% repeat-txn lift</span>
+            <span class="metric">52% DAU/MAU growth</span>
+          </div>
+        </div>
+      </div>
+      <div class="proj-card" data-project="digital-naari">
+        <div class="proj-thumb"><img src="assets/Project Images/Digital Naari.png" alt="Digital Naari product screenshot" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;"><div class="proj-stat"><span class="n">₹2Cr+</span><span class="l">Quarterly GTV</span></div></div>
+        <div class="proj-body">
+          <span class="proj-tag">Financial Inclusion · Women Entrepreneurship</span>
+          <h3>Digital Naari</h3>
+          <p>A commerce platform built for women entrepreneurs — the network's "Banker Didis" — aligned with the Lakhpati Didi mission.</p>
+          <div class="metric-row">
+            <span class="metric">25K+ users</span>
+            <span class="metric">₹2 Cr+ quarterly GTV</span>
+            <span class="metric">50K+ women reached</span>
+          </div>
+        </div>
+      </div>
+      <div class="proj-card">
+        <div class="proj-thumb"><img src="assets/Project Images/ONDC Image.png" alt="ONDC Seller Plugin Marketplace screenshot" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;"><div class="proj-stat"><span class="n">30K+</span><span class="l">Orders</span></div></div>
+        <div class="proj-body">
+          <span class="proj-tag">ONDC · Marketplace</span>
+          <h3>ONDC Seller Plugin Marketplace</h3>
+          <p>India's first ONDC seller-plugin marketplace — transaction journeys, settlement and support, built from zero.</p>
+          <div class="metric-row">
+            <span class="metric">₹26L GMV in Q1</span>
+            <span class="metric">30K+ orders</span>
+            <span class="metric">Tier-2 / Tier-3 markets</span>
+          </div>
+        </div>
+      </div>
+      <div class="proj-card">
+        <div class="proj-thumb"><img src="assets/Project Images/CRM Autoclosure.png" alt="CRM Autoclosure Flow screenshot" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;"><div class="proj-stat"><span class="n">75%</span><span class="l">Tickets auto-closed</span></div></div>
+        <div class="proj-body">
+          <span class="proj-tag">CRM · Support Automation</span>
+          <h3>CRM Autoclosure Flow</h3>
+          <p>Identified recurring support challenges, automated resolution workflows, and built a structured process to continuously improve answer quality.</p>
+          <div class="metric-row">
+            <span class="metric">75% auto-closed tickets</span>
+            <span class="metric">NPS 3.9 → 4.2</span>
+            <span class="metric">48% higher answer accuracy</span>
+          </div>
+        </div>
+      </div>
+      <div class="proj-card">
+        <div class="proj-thumb"><div class="proj-icon-badge"><svg class="icon"><use href="#i-layers"/></svg></div><div class="proj-stat"><span class="n">₹2,400</span><span class="l">Avg order value</span></div></div>
+        <div class="proj-body">
+          <span class="proj-tag">eCommerce · Bulk Ordering</span>
+          <h3>Bulk Buying Feature</h3>
+          <p>A bulk ordering capability that raised average order value and grew overall transaction volume across the platform.</p>
+          <div class="metric-row">
+            <span class="metric">AOV ₹1,000 → ₹2,400</span>
+            <span class="metric">42% higher GTV</span>
+          </div>
+        </div>
+      </div>
+      <div class="proj-card">
+        <div class="proj-thumb"><div class="proj-icon-badge"><svg class="icon"><use href="#i-network"/></svg></div><div class="proj-stat"><span class="n">43%</span><span class="l">Conversion lift</span></div></div>
+        <div class="proj-body">
+          <span class="proj-tag">Sales Enablement · Remote Ordering</span>
+          <h3>Remote Order</h3>
+          <p>A remote ordering flow that enabled call sales agents to place orders on behalf of retailers, lifting order conversion rates.</p>
+          <div class="metric-row">
+            <span class="metric">43% higher conversion rate</span>
+          </div>
+        </div>
+      </div>
+      <div class="proj-card">
+        <div class="proj-thumb"><div class="proj-icon-badge"><svg class="icon"><use href="#i-cart"/></svg></div><div class="proj-stat"><span class="n">1L+</span><span class="l">Retailers</span></div></div>
+        <div class="proj-body">
+          <span class="proj-tag">eCommerce · Platform Pivot</span>
+          <h3>BuyNearby</h3>
+          <p>Pivoted the platform from seller-side to buyer-side commerce, rebuilding the growth model from the ground up.</p>
+          <div class="metric-row">
+            <span class="metric">₹3 Cr → ₹10 Cr quarterly revenue</span>
+            <span class="metric">10K → 1L+ retailers</span>
+          </div>
+        </div>
+      </div>
+      <div class="proj-card" data-project="jiomart-refund-engine">
+        <div class="proj-thumb"><img src="assets/Project Images/Refund Engine.png" alt="JioMart Refund Engine screenshot" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;"><div class="proj-stat"><span class="n">48%</span><span class="l">Faster refund TAT</span></div></div>
+        <div class="proj-body">
+          <span class="proj-tag">Payments · Post-Order Experience</span>
+          <h3>JioMart Refund Engine</h3>
+          <p>Led development of an approval-based Refund Engine and redesigned payment workflows across JioMart's post-order ecosystem.</p>
+          <div class="metric-row">
+            <span class="metric">48% faster refunds</span>
+            <span class="metric">74% less manual effort</span>
+            <span class="metric">40% fewer support tickets</span>
+          </div>
+        </div>
+      </div>
+      <div class="proj-card" data-project="subsidex">
+        <div class="proj-thumb"><img src="assets/Project Images/subsidex project.png" alt="Subsidex product screenshot" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;"><div class="proj-stat"><span class="n">₹1Cr+</span><span class="l">ARR generated</span></div></div>
+        <div class="proj-body">
+          <span class="proj-tag">Agri-FinTech · SaaS</span>
+          <h3>Subsidex</h3>
+          <p>A multi-tenant SaaS platform that automated fertilizer subsidy reconciliation across India's claims chain.</p>
+          <div class="metric-row">
+            <span class="metric">₹1 Cr+ ARR</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills" class="section tinted">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Skills</span>
+      <h2>The toolkit behind the work.</h2>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-cat">
+        <h3><svg class="icon icon-sm"><use href="#i-layers"/></svg>Product Management</h3>
+        <div class="skill-tags">
+          <span>Product Strategy</span><span>Product Vision</span><span>Roadmapping</span><span>Product Discovery</span><span>Product Analytics</span><span>GTM Strategy</span><span>Prioritization</span><span>Customer Research</span><span>Stakeholder Management</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <h3><svg class="icon icon-sm"><use href="#i-growth"/></svg>Growth &amp; Analytics</h3>
+        <div class="skill-tags">
+          <span>Product-Led Growth</span><span>A/B Testing</span><span>Experimentation</span><span>Funnel Analysis</span><span>Cohort Analysis</span><span>Retention &amp; Engagement</span><span>Monetization</span><span>North Star Metrics</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <h3><svg class="icon icon-sm"><use href="#i-network"/></svg>Platforms &amp; Domains</h3>
+        <div class="skill-tags">
+          <span>FinTech</span><span>Payments</span><span>eCommerce</span><span>ONDC</span><span>MarTech</span><span>CRM</span><span>Loyalty &amp; Rewards</span><span>B2B2C</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <h3><svg class="icon icon-sm"><use href="#i-chat"/></svg>AI &amp; Technology</h3>
+        <div class="skill-tags">
+          <span>Generative AI</span><span>Agentic AI</span><span>LLM Applications</span><span>RAG</span><span>AI Evaluation Frameworks</span><span>Prompt Engineering</span><span>AI Coding Assistants</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <h3><svg class="icon icon-sm"><use href="#i-badge"/></svg>Leadership &amp; Execution</h3>
+        <div class="skill-tags">
+          <span>Cross-Functional Leadership</span><span>Business Transformation</span><span>Agile &amp; Scrum</span><span>Executive Stakeholder Mgmt</span><span>Change Management</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <h3><svg class="icon icon-sm"><use href="#i-bulb"/></svg>Tools</h3>
+        <div class="skill-tags">
+          <span>JIRA</span><span>Confluence</span><span>SQL</span><span>Clevertap</span><span>Metabase</span><span>GA4</span><span>Figma</span><span>Notion</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:36px;">
+      <h3 style="font-size:14px;color:var(--gold);text-transform:uppercase;letter-spacing:.06em;margin-bottom:16px;display:flex;align-items:center;gap:8px;"><svg class="icon icon-sm"><use href="#i-badge"/></svg>Certifications</h3>
+      <div class="cert-strip">
+        <div class="cert-chip"><b>PSM-I</b>&nbsp;— Scrum.org (Mar'21)</div>
+        <div class="cert-chip"><b>Google PM</b>&nbsp;Certificate (Sep'21)</div>
+        <div class="cert-chip"><b>ONDC</b>&nbsp;Certificate of Excellence (Sep'23)</div>
+        <div class="cert-chip"><b>IT Project Management</b>&nbsp;— ISB (May'20)</div>
+        <div class="cert-chip"><b>Succession Planning Development Program</b>&nbsp;— Jombay (Sep–Nov'23)</div>
+        <div class="cert-chip"><b>Leadership Training Session</b>&nbsp;— UNITAR (Dec'18)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="section">
+  <div class="wrap">
+    <span class="eyebrow">Get in touch</span>
+    <h2>Let's build something <em style="color:var(--gold);font-style:italic;">worth measuring.</em></h2>
+    <p>Open to Product Management opportunities. Happy to talk product strategy, growth loops, or your favourite 0→1 story.</p>
+    <div class="contact-links">
+      <a href="https://mail.google.com/mail/?view=cm&fs=1&to=chauhan.dhruvi25@gmail.com" target="_blank" rel="noopener" class="btn btn-solid"><svg class="icon"><use href="#i-mail"/></svg>Email me</a>
+      <a href="https://www.linkedin.com/in/dhruvi-chauhan-574667128" target="_blank" class="btn btn-ghost"><svg class="icon"><use href="#i-link"/></svg>LinkedIn</a>
+      <a href="uploads/resume.pdf" target="_blank" rel="noopener" download class="btn btn-ghost"><svg class="icon"><use href="#i-download"/></svg>Download Resume</a>
+    </div>
+  </div>
+</section>
+
+<footer>© 2026 Dhruvi Chauhan — Built with intent.</footer>
+
+<script>
+  const PROJECT_RESOURCES = {
+    'saathi-rewards': {
+      ppt:  'assets/ppt/Rewards_Loyalty_Engine_Saathi_App.pptx',
+      html: 'assets/case-studies/Rewards_Loyalty_Saathi_App_Case_Study.html'
+    },
+    'subsidex': {
+      ppt:  'assets/ppt/subsidex-architecture-case-study.pptx',
+      html: 'assets/case-studies/subsidex.html'
+    },
+    'jiomart-refund-engine': {
+      ppt:  'assets/ppt/JioMart_Refund_Engine_Case_Study_1.pptx',
+      html: 'assets/case-studies/JioMart_Refund_Engine_Case_Study.html'
+    },
+    'digital-naari': {
+      ppt:  null,
+      html: 'assets/case-studies/Digital_Naari_Case_Study.html'
+    },
+    // 'buynearby':     { ppt: null, html: null },
+    // 'ondc':          { ppt: null, html: null },
+    'saathi-ai': {
+      ppt:  null,
+      html: 'assets/case-studies/saathi-case-study.html'
+    },
+  };
+
+  document.querySelectorAll('.proj-card[data-project]').forEach(card => {
+    const key = card.dataset.project;
+    const res = PROJECT_RESOURCES[key];
+    if (!res) return;
+
+    const url = res.html || res.ppt;
+    if (!url) return;
+
+    card.addEventListener('click', () => {
+      if (res.html) {
+        window.location.href = url;
+      } else {
+        window.open(url, '_blank');
+      }
+    });
+  });
+</script>
+
+</body>
+</html>

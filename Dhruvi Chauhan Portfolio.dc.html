@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400..700&family=Space+Grotesk:wght@400..700&family=Public+Sans:wght@300..600&display=swap" rel="stylesheet">
+<script src="./image-slot.js"></script>
+<template id="__bundler_thumbnail">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect width="200" height="200" fill="#101018"/><circle cx="100" cy="100" r="55" fill="none" stroke="#7C6FF0" stroke-width="6"/><text x="100" y="112" font-size="46" text-anchor="middle" fill="#EDEBF5" font-family="sans-serif" font-weight="700">DC</text></svg>
+</template>
+<style>
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;background:#101018;}
+a{color:#9D93F5;}
+a:hover{color:#7C6FF0;}
+[data-reveal]{opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1);}
+@keyframes floatyB{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
+@keyframes pulseDot{0%,100%{opacity:1;}50%{opacity:.3;}}
+@keyframes mascotBob{0%,100%{transform:translateY(0) rotate(-3deg);}50%{transform:translateY(-8px) rotate(3deg);}}
+@keyframes mascotBlink{0%,92%,100%{transform:scaleY(1);}96%{transform:scaleY(.1);}}
+</style>
+</helmet>
+
+<div style="background:#101018;font-family:'Public Sans',system-ui,sans-serif;color:#EDEBF5;min-height:100vh;">
+
+  <!-- nav -->
+  <div style="display:flex;justify-content:space-between;align-items:center;padding:26px 48px;border-bottom:1px solid rgba(255,255,255,.08);position:sticky;top:0;background:#101018;z-index:10;">
+    <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:19px;letter-spacing:-.01em;">Dhruvi Chauhan</div>
+    <div style="display:flex;gap:8px;font-size:12px;font-weight:600;letter-spacing:.02em;">
+      <a href="#home" style="text-decoration:none;color:#EDEBF5;padding:8px 14px;border-radius:999px;transition:background .25s,color .25s;" style-hover="background:#7C6FF0;color:#101018;">Home</a>
+      <a href="#about" style="text-decoration:none;color:#EDEBF5;padding:8px 14px;border-radius:999px;transition:background .25s,color .25s;" style-hover="background:#7C6FF0;color:#101018;">About</a>
+      <a href="#more" style="text-decoration:none;color:#EDEBF5;padding:8px 14px;border-radius:999px;transition:background .25s,color .25s;" style-hover="background:#7C6FF0;color:#101018;">More</a>
+      <a href="#journey" style="text-decoration:none;color:#EDEBF5;padding:8px 14px;border-radius:999px;transition:background .25s,color .25s;" style-hover="background:#7C6FF0;color:#101018;">Journey</a>
+      <a href="#skills" style="text-decoration:none;color:#EDEBF5;padding:8px 14px;border-radius:999px;transition:background .25s,color .25s;" style-hover="background:#7C6FF0;color:#101018;">Skills</a>
+      <a href="#projects" style="text-decoration:none;color:#EDEBF5;padding:8px 14px;border-radius:999px;transition:background .25s,color .25s;" style-hover="background:#7C6FF0;color:#101018;">Projects</a>
+      <a href="#contact" style="text-decoration:none;color:#EDEBF5;padding:8px 14px;border-radius:999px;transition:background .25s,color .25s;" style-hover="background:#7C6FF0;color:#101018;">Contact</a>
+    </div>
+  </div>
+
+  <!-- home / hero -->
+  <div id="home" style="position:relative;display:grid;grid-template-columns:1fr 320px;gap:36px;align-items:center;padding:72px 48px 60px;overflow:hidden;">
+    <div style="position:absolute;top:-140px;right:-100px;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(124,111,240,.18),transparent 70%);pointer-events:none;"></div>
+    <div style="position:relative;">
+      <div style="display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#8FE0D4;background:rgba(69,196,176,.1);padding:7px 14px;border-radius:8px;margin-bottom:22px;">
+        <span style="width:7px;height:7px;border-radius:2px;background:#45C4B0;display:inline-block;animation:pulseDot 2s infinite;"></span>
+        Senior Product Manager · 6+ years
+      </div>
+      <h1 style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:54px;line-height:1.05;letter-spacing:-.02em;margin:0;">Turning 0→1 bets into <span style="color:#9D93F5;">100 Cr+</span> businesses.</h1>
+      <p style="font-size:16px;line-height:1.7;color:#B4B1C7;max-width:46ch;margin:22px 0 0;">I'm Dhruvi Chauhan, a Senior Product Manager building and scaling FinTech, eCommerce and MarTech products across 100K+ retailers and 1M+ customers — currently sharpening strategy and leadership at IIM Kozhikode.</p>
+      <div style="display:flex;gap:12px;margin-top:32px;">
+        <a href="#projects" style="text-decoration:none;background:#7C6FF0;color:#101018;font-size:13px;font-weight:700;padding:14px 24px;border-radius:8px;transition:background .25s,box-shadow .25s;" style-hover="background:#9D93F5;box-shadow:0 12px 28px rgba(124,111,240,.35);">View projects</a>
+        <a href="assets/Dhruvi Chauhan Resume.docx" download style="text-decoration:none;border:1.5px solid rgba(255,255,255,.18);color:#EDEBF5;font-size:13px;font-weight:700;padding:14px 24px;border-radius:8px;transition:border-color .25s,color .25s;" style-hover="border-color:#45C4B0;color:#45C4B0;">Download résumé</a>
+      </div>
+    </div>
+    <div style="position:relative;width:100%;aspect-ratio:1;animation:floatyB 6s ease-in-out infinite;">
+      <div style="position:absolute;inset:0;border-radius:24px;background:linear-gradient(135deg,rgba(124,111,240,.22),rgba(69,196,176,.16));"></div>
+      <div style="position:relative;width:100%;height:100%;border-radius:24px;overflow:hidden;">
+        <image-slot id="headshot" shape="rounded" radius="24" placeholder="Drop your headshot"></image-slot>
+      </div>
+    </div>
+  </div>
+
+  <!-- about -->
+  <div id="about" data-reveal style="padding:60px 48px;background:rgba(255,255,255,.03);position:relative;">
+    <div style="position:absolute;top:36px;right:56px;width:34px;height:34px;border-radius:50%;background:#7C6FF0;animation:mascotBob 5.5s ease-in-out infinite;display:flex;align-items:center;justify-content:center;gap:6px;">
+      <span style="width:5px;height:5px;border-radius:50%;background:#101018;display:inline-block;animation:mascotBlink 4s infinite;"></span>
+      <span style="width:5px;height:5px;border-radius:50%;background:#101018;display:inline-block;animation:mascotBlink 4s infinite;"></span>
+    </div>
+    <div style="display:grid;grid-template-columns:200px 1fr;gap:36px;align-items:start;">
+      <div style="width:200px;aspect-ratio:4/5;border-radius:16px;overflow:hidden;flex:none;">
+        <image-slot id="about-photo" shape="rounded" radius="16" placeholder="Drop a candid photo"></image-slot>
+      </div>
+      <div>
+        <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#9D93F5;margin-bottom:14px;">About</div>
+        <p style="font-size:16px;line-height:1.7;margin:0;">From reconciling agri-fintech subsidies as a Business Analyst to owning ONDC and AI strategy — I chase one question: what's the smallest change that unlocks the biggest outcome?</p>
+        <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:18px;">
+          <sc-for list="{{ traits }}" as="tr" hint-placeholder-count="4">
+            <span style="font-size:12px;font-weight:600;background:rgba(124,111,240,.12);color:#B4ACF8;border-radius:8px;padding:9px 16px;">{{ tr.name }}</span>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:48px;padding-top:44px;border-top:1px solid rgba(255,255,255,.08);">
+      <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#9D93F5;margin-bottom:22px;">Why I love product management</div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;">
+        <sc-for list="{{ whyPM }}" as="w" hint-placeholder-count="3">
+          <div data-reveal style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:20px 20px;transition:border-color .3s,transform .3s;" style-hover="border-color:#45C4B0;transform:translateY(-3px);">
+            <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:16px;">{{ w.t }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+
+  <!-- more about me -->
+  <div id="more" style="padding:60px 48px;background:rgba(255,255,255,.03);">
+    <div data-reveal style="text-align:center;margin-bottom:44px;">
+      <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#9D93F5;margin-bottom:10px;">Two more angles</div>
+      <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:30px;">More about myself</div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start;">
+
+      <div data-reveal>
+        <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:18px;">
+          <span style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:18px;">My Johari Window</span>
+          <span style="font-size:10px;color:#6E6C82;font-family:ui-monospace,monospace;">Self + peer assessment</span>
+        </div>
+        <div style="width:100%;aspect-ratio:4/3;border-radius:14px;overflow:hidden;margin-bottom:16px;">
+          <image-slot id="johari-window" shape="rect" placeholder="Drop Johari Window image"></image-slot>
+        </div>
+        <div id="bigfive" style="display:flex;flex-wrap:wrap;gap:8px;">
+          <sc-for list="{{ bigFive }}" as="b" hint-placeholder-count="4">
+            <span style="font-size:11.5px;font-weight:600;padding:7px 12px;border-radius:8px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);color:{{ b.color }};">{{ b.trait }}</span>
+          </sc-for>
+        </div>
+      </div>
+
+      <div data-reveal>
+        <div style="margin-bottom:18px;">
+          <span style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:18px;">Me, in 20 words</span>
+        </div>
+        <div style="position:relative;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:18px;padding:26px 20px 22px;">
+          <div style="text-align:center;font-family:'Lora',serif;font-style:italic;font-weight:600;font-size:22px;color:#EDEBF5;margin-bottom:14px;">Dhruvi</div>
+          <div style="display:grid;grid-template-columns:1fr 118px 1fr;align-items:center;gap:8px;">
+            <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px;">
+              <sc-for list="{{ caricatureLeft }}" as="w" hint-placeholder-count="10">
+                <span style="font-size:11.5px;font-weight:700;letter-spacing:.02em;color:{{ w.color }};background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:7px;padding:5px 10px;white-space:nowrap;">{{ w.w }}</span>
+              </sc-for>
+            </div>
+            <div style="width:118px;height:118px;border-radius:50%;overflow:hidden;justify-self:center;box-shadow:0 0 0 3px rgba(157,147,245,.25),0 0 40px rgba(124,111,240,.2);">
+              <image-slot id="caricature" shape="circle" placeholder="Drop a caricature/illustration"></image-slot>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:flex-start;gap:8px;">
+              <sc-for list="{{ caricatureRight }}" as="w" hint-placeholder-count="10">
+                <span style="font-size:11.5px;font-weight:700;letter-spacing:.02em;color:{{ w.color }};background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:7px;padding:5px 10px;white-space:nowrap;">{{ w.w }}</span>
+              </sc-for>
+            </div>
+          </div>
+          <div style="text-align:center;margin-top:16px;font-family:'Lora',serif;font-style:italic;font-size:13.5px;color:#8FE0D4;">Best self</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- journey -->
+  <div id="journey" style="padding:60px 48px;">
+    <div data-reveal style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:30px;margin-bottom:32px;letter-spacing:-.01em;">Journey</div>
+    <div style="position:relative;padding-left:36px;">
+      <div style="position:absolute;left:7px;top:6px;bottom:6px;width:2px;background:linear-gradient(180deg,#7C6FF0,rgba(124,111,240,.1));"></div>
+      <sc-for list="{{ journey }}" as="h" hint-placeholder-count="5">
+        <div data-reveal style="position:relative;margin-bottom:22px;">
+          <div style="position:absolute;left:-32px;top:5px;width:11px;height:11px;border-radius:3px;background:#101018;border:2px solid #7C6FF0;"></div>
+          <div style="display:flex;gap:18px;align-items:center;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:18px 24px;transition:border-color .3s;" style-hover="border-color:#7C6FF0;">
+            <div style="flex:none;width:56px;height:56px;border-radius:12px;overflow:hidden;background:rgba(255,255,255,.05);">
+              <image-slot id="{{ h.logoId }}" shape="rounded" radius="12" placeholder="Logo"></image-slot>
+            </div>
+            <div>
+              <div style="display:flex;gap:10px;align-items:center;margin-bottom:6px;">
+                <span style="font-size:12px;color:#8B889E;font-weight:600;">{{ h.yr }}</span>
+                <span style="font-size:10.5px;letter-spacing:.08em;background:rgba(69,196,176,.12);color:#7FDCC9;padding:5px 12px;border-radius:999px;">{{ h.tag }}</span>
+              </div>
+              <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:17px;">{{ h.org }}</div>
+              <div style="font-size:13px;color:#B4B1C7;margin-top:4px;line-height:1.5;">{{ h.note }}</div>
+            </div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <!-- skills -->
+  <div id="skills" data-reveal style="padding:60px 48px;">
+    <div style="text-align:center;margin-bottom:44px;">
+      <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#9D93F5;margin-bottom:10px;">What I bring</div>
+      <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:30px;">Skills &amp; Tools</div>
+    </div>
+    <div style="display:grid;grid-template-columns:1.1fr .9fr;gap:40px;">
+      <div>
+        <div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#8B889E;margin-bottom:16px;">Core skills</div>
+        <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;">
+          <sc-for list="{{ skills }}" as="s" hint-placeholder-count="8">
+            <div style="display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:18px 12px;transition:border-color .3s,transform .3s;" style-hover="transform:translateY(-3px);">
+              <span style="width:40px;height:40px;border-radius:10px;background:{{ s.bg }};color:{{ s.accent }};display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:13px;">{{ s.abbr }}</span>
+              <span style="font-size:13px;font-weight:600;line-height:1.3;">{{ s.name }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#8B889E;margin-bottom:16px;">Toolbox</div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;">
+          <sc-for list="{{ tools }}" as="t" hint-placeholder-count="8">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:8px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:16px 8px;transition:border-color .3s,transform .3s;" style-hover="border-color:#45C4B0;transform:translateY(-3px);">
+              <span style="width:38px;height:38px;border-radius:50%;background:rgba(69,196,176,.12);color:#7FDCC9;display:flex;align-items:center;justify-content:center;font-family:ui-monospace,monospace;font-weight:700;font-size:12px;">{{ t.abbr }}</span>
+              <span style="font-size:11.5px;font-weight:600;text-align:center;">{{ t.name }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- projects -->
+  <div id="projects" style="padding:60px 48px;background:rgba(255,255,255,.03);">
+    <div data-reveal style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:28px;">
+      <span style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:30px;letter-spacing:-.01em;">Projects</span>
+      <span style="font-size:12px;color:#8B889E;">Click a tile to open the deck</span>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;">
+      <sc-for list="{{ caseStudies }}" as="c" hint-placeholder-count="9">
+        <a href="{{ c.deck }}" target="_blank" rel="noopener" data-reveal style="display:block;text-decoration:none;color:inherit;background:rgba(255,255,255,.04);border:1.5px solid rgba(255,255,255,.08);border-radius:16px;overflow:hidden;transition:border-color .3s,box-shadow .3s,transform .3s;" style-hover="border-color:#7C6FF0;box-shadow:0 14px 32px rgba(124,111,240,.18);transform:translateY(-4px);">
+          <div style="aspect-ratio:16/10;position:relative;">
+            <image-slot id="{{ c.slotId }}" shape="rect" placeholder="Drop project shot"></image-slot>
+            <span style="position:absolute;top:12px;right:12px;width:32px;height:32px;border-radius:50%;background:rgba(16,16,24,.7);border:1px solid rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-size:13px;color:#EDEBF5;pointer-events:none;">↗</span>
+          </div>
+          <div style="padding:18px 20px 20px;">
+            <div style="font-size:10.5px;font-weight:700;letter-spacing:.08em;color:#7FDCC9;margin-bottom:8px;">{{ c.tag }}</div>
+            <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:18px;margin-bottom:10px;">{{ c.title }}</div>
+            <div style="display:flex;align-items:baseline;gap:6px;">
+              <span style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:22px;color:#9D93F5;">{{ c.metric }}</span>
+              <span style="font-size:10.5px;color:#8B889E;">{{ c.metricLabel }}</span>
+            </div>
+          </div>
+        </a>
+      </sc-for>
+    </div>
+  </div>
+
+  <!-- download resume banner -->
+  <div id="resume" data-reveal style="margin:60px 48px;padding:40px 44px;border-radius:18px;background:linear-gradient(120deg,rgba(124,111,240,.16),rgba(69,196,176,.1));border:1px solid rgba(124,111,240,.3);display:flex;justify-content:space-between;align-items:center;gap:24px;">
+    <div>
+      <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:22px;margin-bottom:6px;">Want the full picture?</div>
+      <div style="font-size:14px;color:#B4B1C7;">Grab my résumé for the complete work history and references.</div>
+    </div>
+    <a href="assets/Dhruvi Chauhan Resume.docx" download style="flex:none;text-decoration:none;background:#EDEBF5;color:#101018;font-size:13px;font-weight:700;padding:14px 26px;border-radius:9px;transition:background .25s;" style-hover="background:#9D93F5;color:#101018;">Download résumé ↓</a>
+  </div>
+
+  <!-- contact -->
+  <div id="contact" data-reveal style="padding:76px 48px;background:#0A0A10;color:#EDEBF5;text-align:center;">
+    <div style="font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#8FE0D4;margin-bottom:18px;">Let's talk</div>
+    <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:32px;margin-bottom:40px;">Let's build something worth 100 Cr+</div>
+    <div style="display:flex;justify-content:center;gap:16px;flex-wrap:wrap;">
+      <a href="tel:+919930629455" style="display:flex;align-items:center;gap:12px;text-decoration:none;color:#EDEBF5;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:16px 22px;min-width:210px;transition:border-color .3s,transform .3s;" style-hover="border-color:#7C6FF0;transform:translateY(-3px);">
+        <span style="flex:none;width:38px;height:38px;border-radius:10px;background:rgba(124,111,240,.15);color:#9D93F5;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12.5px;font-family:ui-monospace,monospace;">Ph</span>
+        <span style="text-align:left;">
+          <span style="display:block;font-size:10.5px;color:#8B889E;letter-spacing:.06em;text-transform:uppercase;">Phone</span>
+          <span style="display:block;font-size:14px;font-weight:600;">+91 99306 29455</span>
+        </span>
+      </a>
+      <a href="mailto:bl26dhruvi@iimk.ac.in" style="display:flex;align-items:center;gap:12px;text-decoration:none;color:#EDEBF5;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:16px 22px;min-width:210px;transition:border-color .3s,transform .3s;" style-hover="border-color:#45C4B0;transform:translateY(-3px);">
+        <span style="flex:none;width:38px;height:38px;border-radius:10px;background:rgba(69,196,176,.15);color:#7FDCC9;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12.5px;font-family:ui-monospace,monospace;">@</span>
+        <span style="text-align:left;">
+          <span style="display:block;font-size:10.5px;color:#8B889E;letter-spacing:.06em;text-transform:uppercase;">Email</span>
+          <span style="display:block;font-size:14px;font-weight:600;">bl26dhruvi@iimk.ac.in</span>
+        </span>
+      </a>
+      <a href="https://www.linkedin.com/in/dhruvi-chauhan-574667128" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:12px;text-decoration:none;color:#EDEBF5;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:16px 22px;min-width:210px;transition:border-color .3s,transform .3s;" style-hover="border-color:#9D93F5;transform:translateY(-3px);">
+        <span style="flex:none;width:38px;height:38px;border-radius:10px;background:rgba(124,111,240,.15);color:#9D93F5;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12.5px;font-family:ui-monospace,monospace;">in</span>
+        <span style="text-align:left;">
+          <span style="display:block;font-size:10.5px;color:#8B889E;letter-spacing:.06em;text-transform:uppercase;">LinkedIn</span>
+          <span style="display:block;font-size:14px;font-weight:600;">/in/dhruvi-chauhan-574667128</span>
+        </span>
+      </a>
+    </div>
+  </div>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { bigFiveRevealed: false };
+  renderVals() {
+    const barsOn = this.state.bigFiveRevealed;
+    if (this._staticVals) {
+      const bigFive = this._staticVals.bigFiveRaw.map(([trait, level, note], i) => ({ trait, level, note, width: barsOn ? level : 0, color: i % 2 === 0 ? '#9D93F5' : '#7FDCC9' }));
+      return { ...this._staticVals, bigFive };
+    }
+    const traits = ['Data-driven', 'Cross-functional leader', '0→1 builder', 'AI-forward'].map(name => ({ name }));
+    const caricatureLeftRaw = ['Adaptable', 'Bold', 'Cheerful', 'Energetic', 'Extroverted'];
+    const caricatureRightRaw = ['Friendly', 'Happy', 'Kind', 'Logical', 'Mature', 'Sensible'];
+    const caricatureColors = ['#9D93F5', '#7FDCC9', '#F2879A', '#7FB8F2'];
+    const caricatureLeft = caricatureLeftRaw.map((w, i) => ({ w, color: caricatureColors[i % caricatureColors.length] }));
+    const caricatureRight = caricatureRightRaw.map((w, i) => ({ w, color: caricatureColors[(i + 2) % caricatureColors.length] }));
+    const bigFiveRaw = [
+      ['Open Area (Arena)', 79, 'Adaptable, bold, cheerful, energetic, friendly, logical, sensible — known to self and others.'],
+      ['Blind Spot', 93, 'Confident, dependable, intelligent, trustworthy — traits others see more than I do.'],
+      ['Hidden Area (Facade)', 29, 'Able, accepting, calm, loving — known to me, not strongly visible to others.'],
+      ['Unknown Area', 100, 'The largest quadrant — room still to explore, over time and across situations.'],
+    ];
+    const bigFive = bigFiveRaw.map(([trait, level, note], i) => ({ trait, level, note, width: barsOn ? level : 0, color: i % 2 === 0 ? '#9D93F5' : '#7FDCC9' }));
+    const skillNames = [
+      ['Product Strategy & Vision', 'PS'], ['Product Discovery & Research', 'DR'], ['Roadmapping & GTM', 'RM'], ['A/B Testing & Experimentation', 'AB'],
+      ['Data-Driven Decision Making', 'DA'], ['Stakeholder & Client Management', 'SA'], ['Growth & Retention (DAU/MAU)', 'GR'], ['AI Product Development (GenAI/RAG)', 'AI'],
+    ];
+    const skills = skillNames.map(([name, abbr], i) => {
+      const violet = i % 2 === 0;
+      return { name, abbr, accent: violet ? '#9D93F5' : '#7FDCC9', bg: violet ? 'rgba(124,111,240,.14)' : 'rgba(69,196,176,.14)' };
+    });
+    const tools = ['Figma', 'SQL', 'JIRA', 'Confluence', 'Clevertap', 'Metabase', 'GA4', 'Notion', 'Miro', 'Whimsical', 'Azure DevOps', 'Claude Code'].map(name => ({ name, abbr: name.slice(0, 2).toUpperCase() }));
+    const caseStudiesRaw = [
+      { tag: 'FINTECH · ONDC', title: 'ONDC Seller Plugin Marketplace', summary: 'Owned strategy, transaction journeys and settlement architecture for an industry-first ONDC plugin, launched with the ONDC team.', metric: '30K+', metricLabel: 'orders, first quarter', deck: 'decks/ondc-seller-plugin.pptx' },
+      { tag: 'FINANCIAL INCLUSION', title: 'Digital Naari', summary: 'Owned strategy and launch of a commerce platform creating earning opportunities for women entrepreneurs.', metric: '25K+', metricLabel: 'users onboarded', deck: 'decks/digital-naari.pptx' },
+      { tag: 'AI · SUPPORT', title: 'Saathi — AI Financial Assistant', summary: 'Conceptualized a multilingual RAG + LLM assistant that resolves customer queries independently.', metric: '-43%', metricLabel: 'support dependency', deck: 'decks/saathi-ai-assistant.pptx' },
+      { tag: 'GROWTH · LOYALTY', title: 'Referral & Loyalty Program', summary: 'Owned the loyalty roadmap using experimentation, CRM personalization and lifecycle engagement.', metric: '+64%', metricLabel: 'repeat transactions', deck: 'decks/referral-loyalty.pptx' },
+      { tag: 'ECOMMERCE · MARKETPLACE', title: 'B2B2C Marketplace Strategy', summary: 'Defined and scaled the eCommerce marketplace strategy across affiliate commerce and bulk buying.', metric: '233%', metricLabel: 'QRR growth', deck: 'decks/marketplace-strategy.pptx' },
+      { tag: 'PAYMENTS · OPS', title: 'Refund Engine Redesign', summary: "Led an approval-based refund engine, redesigning payment workflows across JioMart's ecosystem.", metric: '-48%', metricLabel: 'refund turnaround', deck: 'decks/refund-engine.pptx' },
+      { tag: 'AGRI-FINTECH · SAAS', title: 'Subsidex', summary: 'Launched a multi-tenant SaaS platform automating fertilizer subsidy reconciliation for enterprises.', metric: '1 Cr+', metricLabel: 'ARR generated', deck: 'decks/subsidex.pptx' },
+    ];
+    const caseStudies = caseStudiesRaw.map((c, i) => ({ ...c, slotId: 'project-' + i }));
+    const whyPM = [
+      { t: 'The puzzle 🧩' },
+      { t: 'The people 🤝' },
+      { t: 'The proof 📈' },
+    ];
+    const journeyRaw = [
+      { yr: '2015–2019', tag: 'EDUCATION', org: 'B.Tech (ENTC), K. J. Somaiya College of Engineering', note: 'Cultural Secretary & Alumni Cell Head — 20+ sponsorships, 5,000+ alumni engaged.' },
+      { yr: 'Dec\u201919 – Jul\u201921', tag: 'BUSINESS ANALYST', org: 'Neebal Technologies', note: 'Launched Subsidex, agri-fintech SaaS platform — INR 1 Cr+ ARR.' },
+      { yr: 'Jul\u201921 – Nov\u201921', tag: 'PROGRAM MANAGER', org: 'Fynd (Shopsense Retail Technologies)', note: 'Led the Refund Engine build — 48% faster turnaround across JioMart.' },
+      { yr: 'Nov\u201921 – Mar\u201926', tag: 'SENIOR PRODUCT MANAGER', org: 'PayNearby (Nearby Technologies)', note: 'Scaled eCommerce, ONDC, Loyalty and AI to 100K+ retailers, 1M+ customers.' },
+      { yr: '2026–2027', tag: 'MBA', org: 'IIM Kozhikode — PGP-Business Leadership', note: 'Strengthening strategic leadership and enterprise decision-making.' },
+    ];
+    const journey = journeyRaw.map((j, i) => ({ ...j, logoId: 'logo-' + i }));
+    this._staticVals = { traits, skills, tools, caseStudies, journey, whyPM, caricatureLeft, caricatureRight, bigFiveRaw };
+    return { ...this._staticVals, bigFive };
+  }
+
+  componentDidMount() {
+    this.initReveals();
+    this.initBars();
+  }
+
+  initBars() {
+    const find = () => document.getElementById('bigfive');
+    let target = find();
+    const start = () => {
+      target = target || find();
+      if (!target) { requestAnimationFrame(start); return; }
+      const io = new IntersectionObserver((ents) => {
+        ents.forEach((e) => {
+          if (e.isIntersecting) {
+            this.setState({ bigFiveRevealed: true });
+            io.disconnect();
+          }
+        });
+      }, { threshold: 0.25 });
+      this._ioBar = io;
+      io.observe(target);
+    };
+    start();
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this._revealFallback);
+    if (this._io) this._io.disconnect();
+    if (this._ioBar) this._ioBar.disconnect();
+  }
+
+  initReveals() {
+    const reveal = (el) => { el.style.opacity = '1'; el.style.transform = 'none'; };
+    const seen = new WeakSet();
+    const io = new IntersectionObserver((ents) => {
+      ents.forEach((e) => {
+        if (e.isIntersecting) {
+          const el = e.target;
+          const sibs = el.parentNode ? Array.prototype.indexOf.call(el.parentNode.children, el) : 0;
+          el.style.transitionDelay = Math.min(sibs, 6) * 0.06 + 's';
+          reveal(el);
+          io.unobserve(el);
+        }
+      });
+    }, { threshold: 0.05, rootMargin: '0px 0px -4% 0px' });
+    this._io = io;
+    const observe = () => {
+      document.querySelectorAll('[data-reveal]').forEach((el) => {
+        if (seen.has(el)) return;
+        seen.add(el);
+        io.observe(el);
+      });
+    };
+    observe();
+    let tries = 0;
+    const iv = setInterval(() => { observe(); if (++tries > 12) clearInterval(iv); }, 250);
+    this._revealFallback = setTimeout(() => {
+      document.querySelectorAll('[data-reveal]').forEach((el) => {
+        if (getComputedStyle(el).opacity === '0') { el.style.setProperty('transition', 'none', 'important'); reveal(el); }
+      });
+      clearInterval(iv);
+    }, 2500);
+  }
+}
+
+</script>
+</body>
+</html>

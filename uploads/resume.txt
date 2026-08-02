@@ -1,0 +1,50 @@
+Dhruvi Chauhan | PGP-Business Leadership
+Indian Institute of Management, Kozhikode – Co ‘27
+bl26dhruvi@iimk.ac.in | M: +91 9930629455 www.linkedin.com/in/dhruvi-chauhan-574667128
+Profile Summary
+Senior Product Manager with 6+ years of experience building and scaling products across FinTech, eCommerce, MarTech, Loyalty, and CRM ecosystems within high-growth startup environments. Led 0→1 product launches and 1→N scale initiatives serving 100K+ retailers and 1M+ customers, generating INR100+ Cr in business impact through product-led growth, platform expansion, and digital transformation. Experienced in defining product vision, shaping strategy, and leading cross-functional teams to translate complex business opportunities into scalable products with measurable business outcomes. Expertise spans Product Strategy, Growth &amp; Monetization, Platform Development, Stakeholder Management, and Data-Driven Decision Making, with hands-on experience building AI-powered solutions using Generative AI, Agentic AI, and automation to enhance customer experiences and operational efficiency. Currently pursuing PGP-Business Leadership at the Indian Institute of Management Kozhikode to strengthen strategic leadership, enterprise decision-making, and organizational transformation, complemented by a B.Tech (ENTC).
+Product Portfolio: Link to be inserted here 
+Professional Experience75 Months
+Senior Product Manager, PayNearby (Nearby Technologies Pvt. Ltd.)         Nov’21 - Mar ‘26
+    E-commerce &amp; Financial Inclusion Initiatives
+Increased quarterly recurring revenue by 233% (INR 3 Cr to INR 12 Cr) by defining and scaling PayNearby's eCommerce marketplace strategy across Affiliate Commerce, Seller Experience, B2B2C Marketplace, and Bulk Buying platforms, driving adoption among 100K+ retailers and expanding the e-commerce ecosystem.
+Launched an industry-first ONDC Seller Plugin Marketplace, owning product strategy, transaction journeys, settlement architecture, and support operations in partnership with the ONDC team, generating INR 26 Lakh GMV and 30K+ orders within the first quarter across Tier-2 and Tier-3 markets.
+Owned product strategy and launch of Digital Naari, a financial inclusion and commerce platform designed to create sustainable earning opportunities for women entrepreneurs; scaled adoption to 25K+ users and generated INR 2 Cr+ quarterly GTV through digital commerce and financial services engagement.
+Directed 3 cross-functional product squads (24+ members) serving 100K+ retailers and 1M+ customers, driving product strategy, roadmap execution, GTM, and delivery across eCommerce, ONDC, CRM, Loyalty, AI-powered solutions, and Financial Services platforms while mentoring Associate Product Managers.
+    Loyalty, Retention &amp; Growth
+Delivered 30% acquisition growth, 60% retention uplift, and 64% increase in repeat transactions across 20K+ users by owning the referral and loyalty product roadmap, leveraging experimentation, A/B testing, CRM personalization, and lifecycle engagement strategies.
+Accelerated DAU/MAU by 52% through behavioral analytics, funnel optimization, and cohort-based experimentation, transforming user insights into product improvements that enhanced activation, engagement, and retention.
+   AI &amp; Digital Innovation
+Improved self-service resolution by 38% and reduced support dependency by 43% by conceptualizing and launching Saathi, a multilingual AI-powered financial assistant (RAG + LLM refined) serving 5K+ MAUs and handling 6K+ monthly queries, helping customers resolve issues independently and efficiently.
+Auto-closed 75% of inbound tickets, improved NPS from 3.9 to 4.2, and increased answer accuracy by 48% by identifying recurring support challenges, automating resolution workflows, and implementing a structured process to continuously improve the quality and reliability of AI-generated responses.
+Program Manager, Fynd (Shopsense Retail Technologies)   Jul’21 – Nov’21
+Reduced refund turnaround time by 48%, manual processing effort by 74%, and payment-related support tickets by 40% by leading the development of an approval-based Refund Engine and redesigning payment workflows, improving customer experience and operational efficiency across JioMart's payment ecosystem.
+Business Analyst, Neebal Technologies Pvt Ltd  Dec’19 – July’21
+Generated INR 1 Cr+ ARR by launching Subsidex, a multi-tenant Agri-FinTech SaaS platform that automated fertilizer subsidy reconciliation for enterprises.
+Improved demand and supply visibility by 40%+ by building a distributor intelligence platform for Bacardi's largest private and government distributors.
+Delivered 50+ product initiatives by aligning executives, clients, and cross-functional teams to prioritize roadmaps and accelerate business outcomes.
+Education
+Course
+Institute
+Year
+MBA (PGP-BL)
+Indian Institute of Management, Kozhikode
+2026-27
+                  B.Tech (ENTC)
+K. J. Somaiya College of Engineering, Mumbai
+2015-2019
+Skills and Certifications
+Product Management: Product Strategy, Product Vision, Product Roadmapping, Product Discovery, Product Analytics, Growth Product Management, Go-to-Market (GTM) Strategy, Product Lifecycle Management, Product Prioritization, Customer Research, User Journey Mapping, Stakeholder Management
+Growth &amp; Analytics: A/B Testing, Experimentation, Funnel Analysis, DAU/MAU Optimization, Activation, Retention &amp; Engagement, North Star Metrics, KPI Definition, Cohort Analysis, Conversion Rate Optimization (CRO), Product Metrics, Data-Driven Decision Making
+Platforms &amp; Domains: FinTech, Payments, ONDC, Marketplace Products, Seller Experience, Loyalty &amp; Rewards, CRM, MarTech, eCommerce, B2B SaaS
+AI &amp; Technology: Generative AI, Agentic AI, Conversational AI, LLM Applications, AI Product Development, AI Workflow Automation, AI Coding Assistants (Claude Code, Cursor, GitHub Copilot, ChatGPT), AI Evaluation Frameworks, Prompt Engineering, RAG (Retrieval-Augmented Generation), API Integrations
+Leadership &amp; Execution: Cross-Functional Leadership, Product Delivery, Business Transformation, Client &amp; Stakeholder Management, Negotiation, Agile &amp; Scrum
+Tools: JIRA, Confluence, Azure DevOps, SQL, Clevertap, Metabase, Google Analytics (GA4), Figma, Miro, Whimsical, Notion, Plotline, 
+Certifications: PSM-I by Scrum.org (Mar'21), Google Project Management (Sep'21), ONDC Certificate of Excellence (Sep'23), IT Project Management (ISB) (May'20), Succession Planning Development Program by Jombay (Sep–Nov'23), Leadership Training Session by UNITAR (Dec'18)
+Extra-Curriculars Highlights
+Recognized twice among 800+ employees with the Best Performer for leading strategic product innovations, including ONDC and Digital Naari launches, demonstrating product leadership, execution excellence, and business impact.
+Led 150+ volunteers and programs impacting 450+ underprivileged students as Volunteer Head, U&amp;I NGO, driving mentorship, fundraising, stakeholder management, and community engagement initiatives.
+Secured 20+ sponsorship partnerships, engaged 5000+ alumni, and delivered large-scale student experiences as Cultural Secretary &amp; Alumni Cell Head, KJSCE, demonstrating leadership, negotiation, and relationship management capabilities.
+Led 50+ employee engagement initiatives across a 350+ employee workforce as part of the Cultural Committee, PayNearby, strengthening organizational culture.
+Developed an AI-powered gamified psychometric assessment module using Claude Code for Organizational Behavior evaluations, creating an engaging and interactive experience while generating actionable behavioral insights.
+Organized 3+ industry interactions and 5+ Toastmasters and other events as an Elected Member, Leadership and Entrepreneurship Circle, IIM Kozhikode 

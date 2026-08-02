@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(file /tmp/subsidex_pptx/ppt/media/image*.*)",
+      "Bash(cp /tmp/subsidex_pptx/ppt/media/image1.jpg \"/Users/sibinb/Documents/Sibin/projects/Dhruvi/Portfolio/assets/ppt/subsidex-images/\")",
+      "Bash(cp /tmp/subsidex_pptx/ppt/media/image2.png \"/Users/sibinb/Documents/Sibin/projects/Dhruvi/Portfolio/assets/ppt/subsidex-images/\")",
+      "Bash(cp /tmp/subsidex_pptx/ppt/media/image3.png \"/Users/sibinb/Documents/Sibin/projects/Dhruvi/Portfolio/assets/ppt/subsidex-images/\")",
+      "Bash(cp /tmp/subsidex_pptx/ppt/media/image4.png \"/Users/sibinb/Documents/Sibin/projects/Dhruvi/Portfolio/assets/ppt/subsidex-images/\")"
+    ]
+  }
+}
