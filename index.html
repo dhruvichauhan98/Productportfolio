@@ -22,6 +22,8 @@
     --ink:#EDEBF5;
     --ink-dim:#B4B1C7;
     --ink-faint:#8B889E;
+    --gold-soft-rgb:157 147 245;
+    --steel-soft-rgb:143 224 212;
   }
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
@@ -61,6 +63,14 @@
     transition:color .2s,background .2s;
   }
   .navlinks a:hover{color:var(--gold-soft);background:rgba(201,162,75,.08);}
+  .hamburger{
+    display:none;flex-direction:column;justify-content:center;align-items:center;gap:5px;
+    width:38px;height:38px;background:none;border:none;cursor:pointer;padding:0;flex-shrink:0;
+  }
+  .hamburger span{display:block;width:22px;height:2px;background:var(--ink);border-radius:2px;transition:transform .25s,opacity .25s;}
+  .hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+  .hamburger.open span:nth-child(2){opacity:0;}
+  .hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
 
   /* ---------- hero ---------- */
   #home{padding:72px 0 56px;overflow:hidden;}
@@ -163,26 +173,37 @@
     padding:7px 14px;border-radius:999px;border:1px solid rgba(124,111,240,.28);
   }
 
-  /* ---------- johari ---------- */
-  .johari-intro{font-size:13.5px;color:var(--ink-faint);margin:0 0 22px;}
-  .johari-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
-  .johari-cell{
-    background:var(--navy-800);border:1px solid var(--hairline);border-radius:14px;padding:24px 26px;
-    transition:border-color .3s;
+  /* ---------- traits marquee ---------- */
+  .traits-band{
+    display:flex;align-items:center;gap:22px;
+    border-top:1px solid var(--hairline);border-bottom:1px solid var(--hairline);
+    padding:18px 0;
   }
-  .johari-cell:hover{border-color:var(--gold);}
-  .johari-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px;}
-  .johari-tag{font-size:12px;font-weight:700;letter-spacing:.03em;color:var(--gold-soft);}
-  .johari-count{
-    font-size:10.5px;font-weight:700;color:var(--ink-faint);background:rgba(255,255,255,.06);
-    padding:3px 10px;border-radius:999px;white-space:nowrap;
+  .traits-lead{
+    font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:12px;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);
+    white-space:nowrap;flex:0 0 auto;
   }
-  .johari-pills{display:flex;flex-wrap:wrap;gap:8px;}
-  .jpill{font-size:12px;padding:6px 13px;border-radius:999px;font-weight:500;}
-  .jpill-open{background:rgba(69,196,176,.12);color:#7FDCC9;border:1px solid rgba(69,196,176,.3);}
-  .jpill-blind{background:rgba(240,149,154,.12);color:#F0959A;border:1px solid rgba(240,149,154,.3);}
-  .jpill-hidden{background:rgba(240,200,119,.12);color:#F0C877;border:1px solid rgba(240,200,119,.3);}
-  .johari-muted{font-size:13px;color:var(--ink-faint);line-height:1.7;margin:0;}
+  .traits-marquee{
+    position:relative;overflow:hidden;flex:1 1 auto;
+    -webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);
+    mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);
+  }
+  .traits-track{display:flex;gap:12px;width:max-content;animation:traits-scroll 46s linear infinite;}
+  .traits-marquee:hover .traits-track{animation-play-state:paused;}
+  @keyframes traits-scroll{to{transform:translateX(-50%);}}
+  .chip{
+    flex:0 0 auto;font-family:'Space Grotesk',sans-serif;font-weight:500;
+    font-size:13.5px;line-height:1;padding:9px 17px;border-radius:999px;
+    color:rgb(var(--c));border:1px solid rgb(var(--c) / .32);background:rgb(var(--c) / .07);
+    transition:background .2s;
+  }
+  .chip:hover{background:rgb(var(--c) / .15);}
+  .chip-soft{color:var(--ink);border-color:var(--hairline-strong);background:rgba(255,255,255,.04);}
+  @media(prefers-reduced-motion:reduce){
+    .traits-track{animation:none;flex-wrap:wrap;}
+    .traits-marquee{-webkit-mask-image:none;mask-image:none;}
+  }
   .about-quote{
     border-left:2px solid var(--gold);padding:4px 0 4px 24px;margin:32px 0 0;
     font-family:'Lora',serif;font-style:italic;font-size:19px;line-height:1.6;color:var(--steel-soft);
@@ -240,14 +261,22 @@
 
   @media(max-width:860px){
     .wrap{padding:0 22px;}
-    nav.wrap{padding:18px 22px;}
-    .navlinks{display:none;}
+    nav.wrap{padding:18px 22px;position:relative;}
+    .hamburger{display:flex;}
+    .navlinks{
+      display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;gap:2px;
+      background:var(--navy-950);border-bottom:1px solid var(--hairline);padding:12px 22px 20px;
+    }
+    .navlinks.open{display:flex;}
+    .navlinks a{padding:12px 10px;border-radius:8px;}
     .hero-grid{grid-template-columns:1fr;}
     .portrait{max-width:280px;margin:0 auto;}
     h1.name{font-size:38px;}
-    .about-body,.why-grid,.proj-grid,.skills-grid,.about-grid2,.johari-grid{grid-template-columns:1fr;}
+    .about-body,.why-grid,.proj-grid,.skills-grid,.about-grid2{grid-template-columns:1fr;}
     .job{grid-template-columns:1fr;gap:12px;}
     .section{padding:44px 0;}
+    .traits-band{flex-direction:column;align-items:flex-start;gap:12px;}
+    .traits-marquee{width:100%;}
   }
 /* ---------- icons ---------- */
 .icon{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;}
@@ -397,7 +426,10 @@
 <header>
   <nav class="wrap">
     <div class="brand">Dhruvi Chauhan<span>.</span></div>
-    <div class="navlinks">
+    <button class="hamburger" id="navToggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="navlinks">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="navlinks" id="navlinks">
       <a href="#home">Home</a>
       <a href="#about">About</a>
       <a href="#experience">Journey</a>
@@ -475,56 +507,14 @@
     </div>
 
     <div style="margin-top:36px;">
-      <h3 class="panel-label"><svg class="icon"><use href="#i-network"/></svg>Johari Window</h3>
-      <p class="johari-intro">How I see myself, versus how others see me — mapped across 55 traits.</p>
-
-      <div class="johari-grid">
-        <div class="johari-cell">
-          <div class="johari-head"><span class="johari-tag">OPEN — known to self &amp; others</span><span class="johari-count">11 traits</span></div>
-          <div class="johari-pills">
-            <span class="jpill jpill-open">Adaptable</span>
-            <span class="jpill jpill-open">Bold</span>
-            <span class="jpill jpill-open">Cheerful</span>
-            <span class="jpill jpill-open">Energetic</span>
-            <span class="jpill jpill-open">Extroverted</span>
-            <span class="jpill jpill-open">Friendly</span>
-            <span class="jpill jpill-open">Kind</span>
-            <span class="jpill jpill-open">Logical</span>
-            <span class="jpill jpill-open">Mature</span>
-            <span class="jpill jpill-open">Sensible</span>
-            <span class="jpill jpill-open">Warm</span>
+      <h3 class="panel-label"><svg class="icon"><use href="#i-network"/></svg>In a Few Words</h3>
+      <div class="traits-band">
+        <span class="traits-lead">Described as</span>
+        <div class="traits-marquee">
+          <div class="traits-track">
+            <span class="chip" style="--c:var(--steel-soft-rgb)">Warm</span><span class="chip" style="--c:var(--gold-soft-rgb)">Intelligent</span><span class="chip" style="--c:var(--steel-soft-rgb)">Bold</span><span class="chip" style="--c:var(--gold-soft-rgb)">Dependable</span><span class="chip chip-soft">Calm</span><span class="chip" style="--c:var(--steel-soft-rgb)">Adaptable</span><span class="chip" style="--c:var(--gold-soft-rgb)">Confident</span><span class="chip" style="--c:var(--steel-soft-rgb)">Friendly</span><span class="chip" style="--c:var(--gold-soft-rgb)">Independent</span><span class="chip chip-soft">Loving</span><span class="chip" style="--c:var(--steel-soft-rgb)">Logical</span><span class="chip" style="--c:var(--gold-soft-rgb)">Ingenious</span><span class="chip" style="--c:var(--steel-soft-rgb)">Kind</span><span class="chip" style="--c:var(--gold-soft-rgb)">Trustworthy</span><span class="chip" style="--c:var(--steel-soft-rgb)">Energetic</span><span class="chip" style="--c:var(--gold-soft-rgb)">Observant</span><span class="chip chip-soft">Accepting</span><span class="chip" style="--c:var(--steel-soft-rgb)">Cheerful</span><span class="chip" style="--c:var(--gold-soft-rgb)">Organised</span><span class="chip" style="--c:var(--steel-soft-rgb)">Sensible</span><span class="chip" style="--c:var(--gold-soft-rgb)">Helpful</span><span class="chip" style="--c:var(--steel-soft-rgb)">Mature</span><span class="chip" style="--c:var(--gold-soft-rgb)">Responsive</span><span class="chip chip-soft">Able</span><span class="chip" style="--c:var(--steel-soft-rgb)">Extroverted</span><span class="chip" style="--c:var(--gold-soft-rgb)">Reflective</span><span class="chip" style="--c:var(--gold-soft-rgb)">Knowledgeable</span><span class="chip" style="--c:var(--gold-soft-rgb)">Sympathetic</span>
+            <span class="chip" style="--c:var(--steel-soft-rgb)" aria-hidden="true">Warm</span><span class="chip" style="--c:var(--gold-soft-rgb)" aria-hidden="true">Intelligent</span><span class="chip" style="--c:var(--steel-soft-rgb)" aria-hidden="true">Bold</span><span class="chip" style="--c:var(--gold-soft-rgb)" aria-hidden="true">Dependable</span><span class="chip chip-soft" aria-hidden="true">Calm</span><span class="chip" style="--c:var(--steel-soft-rgb)" aria-hidden="true">Adaptable</span><span class="chip" style="--c:var(--gold-soft-rgb)" aria-hidden="true">Confident</span><span class="chip" style="--c:var(--steel-soft-rgb)" aria-hidden="true">Friendly</span><span class="chip" style="--c:var(--gold-soft-rgb)" aria-hidden="true">Independent</span><span class="chip chip-soft" aria-hidden="true">Loving</span><span class="chip" style="--c:var(--steel-soft-rgb)" aria-hidden="true">Logical</span><span class="chip" style="--c:var(--gold-soft-rgb)" aria-hidden="true">Ingenious</span><span class="chip" style="--c:var(--steel-soft-rgb)" aria-hidden="true">Kind</span><span class="chip" style="--c:var(--gold-soft-rgb)" aria-hidden="true">Trustworthy</span><span class="chip" style="--c:var(--steel-soft-rgb)" aria-hidden="true">Energetic</span><span class="chip" style="--c:var(--gold-soft-rgb)" aria-hidden="true">Observant</span><span class="chip chip-soft" aria-hidden="true">Accepting</span><span class="chip" style="--c:var(--steel-soft-rgb)" aria-hidden="true">Cheerful</span><span class="chip" style="--c:var(--gold-soft-rgb)" aria-hidden="true">Organised</span><span class="chip" style="--c:var(--steel-soft-rgb)" aria-hidden="true">Sensible</span><span class="chip" style="--c:var(--gold-soft-rgb)" aria-hidden="true">Helpful</span><span class="chip" style="--c:var(--steel-soft-rgb)" aria-hidden="true">Mature</span><span class="chip" style="--c:var(--gold-soft-rgb)" aria-hidden="true">Responsive</span><span class="chip chip-soft" aria-hidden="true">Able</span><span class="chip" style="--c:var(--steel-soft-rgb)" aria-hidden="true">Extroverted</span><span class="chip" style="--c:var(--gold-soft-rgb)" aria-hidden="true">Reflective</span><span class="chip" style="--c:var(--gold-soft-rgb)" aria-hidden="true">Knowledgeable</span><span class="chip" style="--c:var(--gold-soft-rgb)" aria-hidden="true">Sympathetic</span>
           </div>
-        </div>
-        <div class="johari-cell">
-          <div class="johari-head"><span class="johari-tag">BLIND SPOT — known to others, not self</span><span class="johari-count">13 traits</span></div>
-          <div class="johari-pills">
-            <span class="jpill jpill-blind">Intelligent</span>
-            <span class="jpill jpill-blind">Dependable</span>
-            <span class="jpill jpill-blind">Organised</span>
-            <span class="jpill jpill-blind">Trustworthy</span>
-            <span class="jpill jpill-blind">Observant</span>
-            <span class="jpill jpill-blind">Confident</span>
-            <span class="jpill jpill-blind">Helpful</span>
-            <span class="jpill jpill-blind">Independent</span>
-            <span class="jpill jpill-blind">Knowledgeable</span>
-            <span class="jpill jpill-blind">Ingenious</span>
-            <span class="jpill jpill-blind">Responsive</span>
-            <span class="jpill jpill-blind">Reflective</span>
-            <span class="jpill jpill-blind">Sympathetic</span>
-          </div>
-        </div>
-        <div class="johari-cell">
-          <div class="johari-head"><span class="johari-tag">HIDDEN — known to self, not others</span><span class="johari-count">4 traits</span></div>
-          <div class="johari-pills">
-            <span class="jpill jpill-hidden">Calm</span>
-            <span class="jpill jpill-hidden">Accepting</span>
-            <span class="jpill jpill-hidden">Able</span>
-            <span class="jpill jpill-hidden">Loving</span>
-          </div>
-        </div>
-        <div class="johari-cell">
-          <div class="johari-head"><span class="johari-tag">UNKNOWN — growth space</span><span class="johari-count">27 traits</span></div>
-          <p class="johari-muted">Neither I nor others have surfaced these yet — clever, patient, wise, and more still to explore.</p>
         </div>
       </div>
     </div>
@@ -629,7 +619,7 @@
     </div>
     <div class="proj-grid">
       <div class="proj-card" data-project="saathi-ai">
-        <div class="proj-thumb"><img src="assets/Project Images/Saathi AI.png" alt="Saathi AI Financial Assistant screenshot" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;"><div class="proj-stat"><span class="n">5K+</span><span class="l">Monthly users</span></div></div>
+        <div class="proj-thumb"><img src="assets/Project Images/Saathi AI.png" alt="Saathi AI Financial Assistant screenshot" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;z-index:0;"><div class="proj-stat"><span class="n">5K+</span><span class="l">Monthly users</span></div></div>
         <div class="proj-body">
           <span class="proj-tag">FinTech · Conversational AI</span>
           <h3>Saathi — AI Financial Assistant</h3>
@@ -642,7 +632,7 @@
         </div>
       </div>
       <div class="proj-card" data-project="saathi-rewards">
-        <div class="proj-thumb"><img src="assets/Project Images/Rewards.png" alt="Saathi Rewards &amp; Engagement Engine screenshot" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;"><div class="proj-stat"><span class="n">20K+</span><span class="l">Users engaged</span></div></div>
+        <div class="proj-thumb"><img src="assets/Project Images/Rewards.png" alt="Saathi Rewards &amp; Engagement Engine screenshot" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;z-index:0;"><div class="proj-stat"><span class="n">20K+</span><span class="l">Users engaged</span></div></div>
         <div class="proj-body">
           <span class="proj-tag">Loyalty · AI · Banking Correspondents</span>
           <h3>Rewards &amp; Engagement Engine — Saathi App</h3>
@@ -656,7 +646,7 @@
         </div>
       </div>
       <div class="proj-card" data-project="digital-naari">
-        <div class="proj-thumb"><img src="assets/Project Images/Digital Naari.png" alt="Digital Naari product screenshot" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;"><div class="proj-stat"><span class="n">₹2Cr+</span><span class="l">Quarterly GTV</span></div></div>
+        <div class="proj-thumb"><img src="assets/Project Images/Digital Naari.png" alt="Digital Naari product screenshot" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;z-index:0;"><div class="proj-stat"><span class="n">₹2Cr+</span><span class="l">Quarterly GTV</span></div></div>
         <div class="proj-body">
           <span class="proj-tag">Financial Inclusion · Women Entrepreneurship</span>
           <h3>Digital Naari</h3>
@@ -669,7 +659,7 @@
         </div>
       </div>
       <div class="proj-card">
-        <div class="proj-thumb"><img src="assets/Project Images/ONDC Image.png" alt="ONDC Seller Plugin Marketplace screenshot" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;"><div class="proj-stat"><span class="n">30K+</span><span class="l">Orders</span></div></div>
+        <div class="proj-thumb"><img src="assets/Project Images/ONDC Image.png" alt="ONDC Seller Plugin Marketplace screenshot" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;z-index:0;"><div class="proj-stat"><span class="n">30K+</span><span class="l">Orders</span></div></div>
         <div class="proj-body">
           <span class="proj-tag">ONDC · Marketplace</span>
           <h3>ONDC Seller Plugin Marketplace</h3>
@@ -682,7 +672,7 @@
         </div>
       </div>
       <div class="proj-card">
-        <div class="proj-thumb"><img src="assets/Project Images/CRM Autoclosure.png" alt="CRM Autoclosure Flow screenshot" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;"><div class="proj-stat"><span class="n">75%</span><span class="l">Tickets auto-closed</span></div></div>
+        <div class="proj-thumb"><img src="assets/Project Images/CRM Autoclosure.png" alt="CRM Autoclosure Flow screenshot" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;z-index:0;"><div class="proj-stat"><span class="n">75%</span><span class="l">Tickets auto-closed</span></div></div>
         <div class="proj-body">
           <span class="proj-tag">CRM · Support Automation</span>
           <h3>CRM Autoclosure Flow</h3>
@@ -730,7 +720,7 @@
         </div>
       </div>
       <div class="proj-card" data-project="jiomart-refund-engine">
-        <div class="proj-thumb"><img src="assets/Project Images/Refund Engine.png" alt="JioMart Refund Engine screenshot" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;"><div class="proj-stat"><span class="n">48%</span><span class="l">Faster refund TAT</span></div></div>
+        <div class="proj-thumb"><img src="assets/Project Images/Refund Engine.png" alt="JioMart Refund Engine screenshot" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;z-index:0;"><div class="proj-stat"><span class="n">48%</span><span class="l">Faster refund TAT</span></div></div>
         <div class="proj-body">
           <span class="proj-tag">Payments · Post-Order Experience</span>
           <h3>JioMart Refund Engine</h3>
@@ -743,7 +733,7 @@
         </div>
       </div>
       <div class="proj-card" data-project="subsidex">
-        <div class="proj-thumb"><img src="assets/Project Images/subsidex project.png" alt="Subsidex product screenshot" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;"><div class="proj-stat"><span class="n">₹1Cr+</span><span class="l">ARR generated</span></div></div>
+        <div class="proj-thumb"><img src="assets/Project Images/subsidex project.png" alt="Subsidex product screenshot" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;z-index:0;"><div class="proj-stat"><span class="n">₹1Cr+</span><span class="l">ARR generated</span></div></div>
         <div class="proj-body">
           <span class="proj-tag">Agri-FinTech · SaaS</span>
           <h3>Subsidex</h3>
@@ -873,6 +863,19 @@
       }
     });
   });
+
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navlinks');
+  navToggle.addEventListener('click', () => {
+    const isOpen = navLinks.classList.toggle('open');
+    navToggle.classList.toggle('open', isOpen);
+    navToggle.setAttribute('aria-expanded', isOpen);
+  });
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    navLinks.classList.remove('open');
+    navToggle.classList.remove('open');
+    navToggle.setAttribute('aria-expanded', 'false');
+  }));
 </script>
 
 </body>

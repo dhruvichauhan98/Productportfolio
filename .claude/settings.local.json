@@ -5,7 +5,17 @@
       "Bash(cp /tmp/subsidex_pptx/ppt/media/image1.jpg \"/Users/sibinb/Documents/Sibin/projects/Dhruvi/Portfolio/assets/ppt/subsidex-images/\")",
       "Bash(cp /tmp/subsidex_pptx/ppt/media/image2.png \"/Users/sibinb/Documents/Sibin/projects/Dhruvi/Portfolio/assets/ppt/subsidex-images/\")",
       "Bash(cp /tmp/subsidex_pptx/ppt/media/image3.png \"/Users/sibinb/Documents/Sibin/projects/Dhruvi/Portfolio/assets/ppt/subsidex-images/\")",
-      "Bash(cp /tmp/subsidex_pptx/ppt/media/image4.png \"/Users/sibinb/Documents/Sibin/projects/Dhruvi/Portfolio/assets/ppt/subsidex-images/\")"
+      "Bash(cp /tmp/subsidex_pptx/ppt/media/image4.png \"/Users/sibinb/Documents/Sibin/projects/Dhruvi/Portfolio/assets/ppt/subsidex-images/\")",
+      "Bash(npx --yes playwright --version)",
+      "Bash(npx --yes playwright install chromium)",
+      "Bash(npm init *)",
+      "Bash(npm install *)",
+      "Bash(node test-mobile-nav.js)",
+      "Bash(python3 -c ' *)",
+      "Bash(node -e ' *)",
+      "Bash(node test-proj-images.js)",
+      "Bash(node test-marquee.js)",
+      "Bash(node test-marquee-mobile-layout.js)"
     ]
   }
 }
