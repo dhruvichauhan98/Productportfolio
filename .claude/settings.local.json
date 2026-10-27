@@ -16,7 +16,9 @@
       "Bash(node test-proj-images.js)",
       "Bash(node test-marquee.js)",
       "Bash(node test-marquee-mobile-layout.js)",
-      "Bash(grep -rn 'href=\"\\\\.\\\\./\\\\.\\\\./index\\\\.html\"' \"assets/case-studies/\"*.html)"
+      "Bash(grep -rn 'href=\"\\\\.\\\\./\\\\.\\\\./index\\\\.html\"' \"assets/case-studies/\"*.html)",
+      "Bash(sort -k6,7)",
+      "Bash(grep -o 'href=\\\\\\\\\"[^\\\\\\\\]*[Rr]esume[^\\\\\\\\]*\\\\\\\\\"' \"Dhruvi Chauhan Portfolio \\(standalone\\).html\")"
     ]
   }
 }
